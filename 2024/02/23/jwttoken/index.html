@@ -1,0 +1,364 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>什么是jwttoken | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="JWT（JSON Web Token）是一种开放标准（RFC 7519），用于在两方之间安全地传递信息。它通常用于身份验证和信息交换，特别是在Web应用程序中。JWT的核心优点是它的紧凑性和自包含性，让它成为Web环境中理想的令牌格式。
+JWT通常由三部分组成，用点（.）分隔：
+
+Header（头部）：它是一个JSON对象，描述了令牌的类型（通常是JWT）以及使用的签名或加密算法（如HMAC、SHA256或RSA）。
+示例：
+1234json复制代码&amp;#123;  &amp;quot;alg&amp;quot;: &amp;quot;HS256&amp;quot;,  &amp;quot;typ&amp;quot;: &amp;quot;JWT&amp;quot;&amp;#125;
+
+Payload（有效载荷）：它也是一个JSON对象，包含了实际传输的声明（Claims）。声明是关于实体（通常是用户）和其他数据的语句。有三种类型的声明：注册声明（如iss、exp、sub）、公共声明和私有声明。
+示例：
+12345json复制代码&amp;#123;  &amp;quot;sub&amp;quot;: &amp;quot;1234567890&amp;quot;,  &amp;quot;name&amp;quot;: &amp;quot;John Doe&amp;quot;,  &amp;quot;admin&amp;quot;: true&amp;#125;
+
+Signature（签名）：为了创建签名部分，您必须使用编码后的header和payload以及一个秘密（只有发送者和接收者知道的秘密），使用header中指定的算法进行签名。
+示例：
+123plaintext复制代码HMACSHA256(  base64UrlEncode(header) + &amp;quot;.&amp;quot; + base64UrlEncode(payload),  secret)
+
+最终，一个JWT可能看起来像这样：
+1复制代码eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dPxL6YlOxIlalLJ4HOdl7QzyiqM0gB1qjUmUISZaD10
+
+这个字符串可以在客户端和服务器之间安全地传递，用于验证用户的身份或传递其他信息。服务器可以验证令牌的签名以确认其未被篡改，并从中提取有用的信息。
+jwttoken有哪些使用场景？
+用户认证：这可能是 JWT 最广泛的应用场景。服务器在用户登录后会生成一个 JWT，并将其发送回客户端，之后客户端会在随后的请求中带上这个 JWT，服务器通过验证 JWT 来确认用户身份。
+跨域身份验证（CORS）：由于 JWT 是自包含的，因此，一个服务可以轻松识别请求是否已被授权，即便是跨域请求。
+无状态会话：JWT 由于其自包含性，可以实现无状态的会话机制。服务器不需要在数据库中保持会话状态，有益于减轻服务器压力并提高伸缩性。
+移动设备认证：JWT 非常适合在移动环境中使用，可以方便地在移动客户端和服务器之间交换认证信息。
+单点登录（SSO）：JWT 可以很方便地用于单点登录（SSO）场景，即用户在不同的系统和服务中仅需登录一次。
+微服务之间的授权：在微服务架构中，不同的服务之间可能需要交换受保护的资源。JWT 可以在这些服务之间提供一个高效和安全的认证和授权机制。
+IoT（物联网）设备鉴权：由于 JWT 的轻量级和灵活性，很适合在物联网环境下对设备进行鉴权。
+访问令牌和刷新令牌：在基于令牌的认证中，经常用 JWT 生成访问令牌（较短的有效期）和刷新令牌（较长的有效期），在保障系统安全的同时提高用户体验。
+
+通过这些使用场景，我们可以看到 JWT 作为一种跨平台的授权解决方案，在当今的众多应用和系统之间扮演着关键的角色。它凭借着可伸缩性、简洁和灵活性而广受欢迎。不过，跟任何技术一样，使用 JWT 时也要妥善处理好和安全性相关的考虑，例如：敏感信息的加密处理、令牌的定期轮换、以及恰当地设置过期时间等。这有助于降低潜在的风险并确保系统的安全性。
+在继续深入 JWT 的使用之前，有几点安全最佳实践需要注意："> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="什么是jwttoken"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 什么是jwttoken</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	
+    <div id="toc">
+        <strong class="sidebar-title">目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#jwttoken%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="toc-text">jwttoken有哪些使用场景？</span></a></li></ol>
+    </div>
+
+	<div class="mypage">		
+	  		
+
+	  <p>JWT（JSON Web Token）是一种开放标准（RFC 7519），用于在两方之间安全地传递信息。它通常用于身份验证和信息交换，特别是在Web应用程序中。JWT的核心优点是它的紧凑性和自包含性，让它成为Web环境中理想的令牌格式。</p>
+<p>JWT通常由三部分组成，用点（<code>.</code>）分隔：</p>
+<ol>
+<li><p><strong>Header（头部）</strong>：它是一个JSON对象，描述了令牌的类型（通常是JWT）以及使用的签名或加密算法（如HMAC、SHA256或RSA）。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;alg&quot;: &quot;HS256&quot;,</span><br><span class="line">  &quot;typ&quot;: &quot;JWT&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Payload（有效载荷）</strong>：它也是一个JSON对象，包含了实际传输的声明（Claims）。声明是关于实体（通常是用户）和其他数据的语句。有三种类型的声明：注册声明（如iss、exp、sub）、公共声明和私有声明。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;John Doe&quot;,</span><br><span class="line">  &quot;admin&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Signature（签名）</strong>：为了创建签名部分，您必须使用编码后的header和payload以及一个秘密（只有发送者和接收者知道的秘密），使用header中指定的算法进行签名。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plaintext复制代码HMACSHA256(</span><br><span class="line">  base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload),</span><br><span class="line">  secret)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>最终，一个JWT可能看起来像这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制代码eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dPxL6YlOxIlalLJ4HOdl7QzyiqM0gB1qjUmUISZaD10</span><br></pre></td></tr></table></figure>
+
+<p>这个字符串可以在客户端和服务器之间安全地传递，用于验证用户的身份或传递其他信息。服务器可以验证令牌的签名以确认其未被篡改，并从中提取有用的信息。</p>
+<h2 id="jwttoken有哪些使用场景？"><a href="#jwttoken有哪些使用场景？" class="headerlink" title="jwttoken有哪些使用场景？"></a>jwttoken有哪些使用场景？</h2><ol>
+<li><strong>用户认证</strong>：这可能是 JWT 最广泛的应用场景。服务器在用户登录后会生成一个 JWT，并将其发送回客户端，之后客户端会在随后的请求中带上这个 JWT，服务器通过验证 JWT 来确认用户身份。</li>
+<li><strong>跨域身份验证（CORS）</strong>：由于 JWT 是自包含的，因此，一个服务可以轻松识别请求是否已被授权，即便是跨域请求。</li>
+<li><strong>无状态会话</strong>：JWT 由于其自包含性，可以实现无状态的会话机制。服务器不需要在数据库中保持会话状态，有益于减轻服务器压力并提高伸缩性。</li>
+<li><strong>移动设备认证</strong>：JWT 非常适合在移动环境中使用，可以方便地在移动客户端和服务器之间交换认证信息。</li>
+<li><strong>单点登录（SSO）</strong>：JWT 可以很方便地用于单点登录（SSO）场景，即用户在不同的系统和服务中仅需登录一次。</li>
+<li><strong>微服务之间的授权</strong>：在微服务架构中，不同的服务之间可能需要交换受保护的资源。JWT 可以在这些服务之间提供一个高效和安全的认证和授权机制。</li>
+<li><strong>IoT（物联网）设备鉴权</strong>：由于 JWT 的轻量级和灵活性，很适合在物联网环境下对设备进行鉴权。</li>
+<li><strong>访问令牌和刷新令牌</strong>：在基于令牌的认证中，经常用 JWT 生成访问令牌（较短的有效期）和刷新令牌（较长的有效期），在保障系统安全的同时提高用户体验。</li>
+</ol>
+<p>通过这些使用场景，我们可以看到 JWT 作为一种跨平台的授权解决方案，在当今的众多应用和系统之间扮演着关键的角色。它凭借着可伸缩性、简洁和灵活性而广受欢迎。不过，跟任何技术一样，使用 JWT 时也要妥善处理好和安全性相关的考虑，例如：敏感信息的加密处理、令牌的定期轮换、以及恰当地设置过期时间等。这有助于降低潜在的风险并确保系统的安全性。</p>
+<p>在继续深入 JWT 的使用之前，有几点安全最佳实践需要注意：</p>
+<ul>
+<li><strong>安全传输</strong>：始终通过 HTTPS 来传输 JWT，以防止中间人攻击。</li>
+<li><strong>令牌有效期</strong>：为 JWT 设置适当的有效期可以减少被盗用的风险。短期的访问令牌和长期的刷新令牌结合使用是一种常见做法。</li>
+<li><strong>签名算法</strong>：使用强大的签名算法（如 RS256）来保证 JWT 的完整性和认证性。</li>
+<li><strong>敏感信息</strong>：避免在 JWT 中存储敏感信息，因为 JWT 的载荷是可以被解码的，除非它被加密。</li>
+<li><strong>令牌刷新</strong>：实现机制以允许令牌在不影响用户体验的情况下被安全地刷新和替换。</li>
+</ul>
+<p>尽管 JWT 提供了许多便利，但它也引入了特定的安全挑战，如令牌泄露、重放攻击、以及令牌的无状态性导致的撤销问题。因此，开发者在使用 JWT 时需要权衡其便利性和潜在的安全风险，确保采取适当的安全措施。</p>
+<p>最后，理解 JWT 的工作原理和它在系统中如何被使用是至关重要的。这包括了解 JWT 的三个主要部分：头部（Header）、载荷（Payload）、签名（Signature），以及它们是如何结合在一起提供安全保障的。通过合理的设计和实施，JWT 可以在保证安全的同时，为用户和系统之间的交互提供无缝和高效的体验。</p>
+
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/02/23/跨域/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/02/23/使用hexo搭建个人博客/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-02-23 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/网络安全/">网络安全<span>4</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/身份验证/">身份验证<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 John Doe's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

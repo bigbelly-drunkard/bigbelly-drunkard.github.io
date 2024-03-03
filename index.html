@@ -1,209 +1,605 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
-  
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
   
   <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <meta name="author" content="John Doe">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-  
-<link rel="stylesheet" href="/css/style.css">
+  <meta property="og:site_name" content="Hexo"/>
 
   
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+    <meta property="og:image" content=""/>
+  
 
   
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
       </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/23/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-02-23T00:57:15.768Z" itemprop="datePublished">2024-02-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/23/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/23/hello-world/" data-id="clsyfniay0000zjnnchc70gtk" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/02/23/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2024 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
+    </div> <!-- container -->
 </nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>Hexo<span class="blink-fast">|</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/02/24/httponly原理/" >httponly原理？</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-02-24  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="设置了httponly后无法被javascript调用？那用户怎么发xhr请求？"><a href="#设置了httponly后无法被javascript调用？那用户怎么发xhr请求？" class="headerlink" title="设置了httponly后无法被javascript调用？那用户怎么发xhr请求？"></a>设置了httponly后无法被javascript调用？那用户怎么发xhr请求？</h2><p>浏览器自动发送带有<code>HttpOnly</code>标志的Cookie是其内置功能的一部分，不需要开发者或用户进行特别设置。当服务器通过设置一个带有<code>HttpOnly</code>标志的Cookie响应一个HTTP请求时，这个Cookie会被浏览器存储起来。之后，每当用户的浏览器向同一域名发送请求时，浏览器会自动附加这个域名下的所有Cookie，包括那些标记为<code>HttpOnly</code>的Cookie。</p>
+<h3 id="实现自动发送HttpOnly-Cookie的步骤："><a href="#实现自动发送HttpOnly-Cookie的步骤：" class="headerlink" title="实现自动发送HttpOnly Cookie的步骤："></a>实现自动发送<code>HttpOnly</code> Cookie的步骤：</h3><ol>
+<li><p><strong>服务器设置Cookie</strong>：在服务器处理用户登录或其他需要设置Cookie的请求时，通过响应头<code>Set-Cookie</code>加上<code>HttpOnly</code>标志来设置Cookie。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制代码Set-Cookie: sessionId=abc123; Path=/; HttpOnly</span><br></pre></td></tr></table></figure>
+
+<p>这告诉浏览器保存这个名为<code>sessionId</code>的Cookie，并在之后的请求中自动发送给服务器，同时因为<code>HttpOnly</code>的存在，这个Cookie不能被客户端JavaScript访问。</p>
+</li>
+<li><p><strong>浏览器存储和管理Cookie</strong>：一旦浏览器接收到这个设置了<code>HttpOnly</code>标志的Cookie，它会将其存储起来，并在之后向相同域名发送的所有请求中自动包含这个Cookie。</p>
+</li>
+<li><p><strong>自动附加Cookie到请求</strong>：用户在与服务器交互时（例如，浏览网页、提交表单等），浏览器会根据需要自动将存储的Cookie附加到向该域名的请求头中，包括那些<code>HttpOnly</code>的Cookie。</p>
+</li>
+</ol>
+<h3 id="重要点："><a href="#重要点：" class="headerlink" title="重要点："></a>重要点：</h3><ul>
+<li><strong>域名和路径</strong>：浏览器只会将Cookie发送给设置它们的相同域名和路径。如果Cookie的<code>Domain</code>和<code>Path</code>属性限制了其作用范围，浏览器会遵守这些规则，只在相应的域和路径下发送Cookie。</li>
+<li><strong>安全和策略</strong>：为增强安全性，建议使用<code>Secure</code>标志（仅通过HTTPS发送Cookie）和<code>SameSite</code>标志（控制Cookie在跨站请求中的发送行为）与<code>HttpOnly</code>标志一同使用。</li>
+</ul>
+<p>通过这种方式，浏览器确保了<code>HttpOnly</code> Cookie的安全性，使其在客户端脚本中不可访问，同时保证了这些Cookie能够在用户与服务器交互时被自动使用，从而支持如会话管理和用户身份验证等功能。</p>
+<p>注：</p>
+<p>httponly能防止客户端js脚本访问和修改凭据，可以在一定程度上防御xss，例如黑客无法做到通过js将用户的cookie发送给自己，但是如果诱导用户自己执行js脚本发送请求，请求还是会发送成功。因此增加了httponly后，黑客实施xss攻击确实更加繁琐了。</p>
+
+	
+	</div>
+  <a type="button" href="/2024/02/24/httponly原理/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/02/23/以太坊学习/" >以太坊学习</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-02-23  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="1-什么是区块链"><a href="#1-什么是区块链" class="headerlink" title="1. 什么是区块链"></a>1. 什么是区块链</h2><p><strong>区块链</strong>（英语：blockchain[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-te20151031-1">1]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-fortune20160515-2">2]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-nyt20160521-3">3]</a>或block chain[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-primer-4">4]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-obmh-5">5]</a>）是借由<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E5%AD%B8">密码学</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-te20151031-1">1]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-cryptocurrencytech-6">6]</a>与<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%85%B1%E8%AD%98%E6%A9%9F%E5%88%B6">共识机制</a>等技术建立与存储庞大交易资料链的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%B0%8D%E7%AD%89%E7%B6%B2%E8%B7%AF">点对点</a>网络系统。</p>
+<p>每一个区块包含了前一个区块的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E9%9B%9C%E6%B9%8A%E5%87%BD%E6%95%B8">加密散列</a>、相应时间戳记以及交易资料（通常用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E6%A0%91">默克尔树</a>（Merkle tree）算法计算的散列值表示）[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-IPblockchain-7">7]</a>，这样的设计使得区块内容具有难以篡改的特性。但如果掌握区块链节点51%以上的运算力，就能操控区块链的内容。如果一开始写入的内容是错误的内容，那么区块链技术只是让错误的内容难以被篡改。[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-storm.mg-8">8]</a></p>
+<p>区块链有哪些应用？</p>
+<ul>
+<li>供应链系统：记录供应链的各个环节实时追踪和记录产品的生产、运输和存储情况</li>
+<li>智能合约：一种自动执行合同的计算机程序，无需第三方介入即可履行合同，无法人为干预</li>
+<li>物联网：构建去中心化的数据库，确保数据一致</li>
+</ul>
+<p>参考<a target="_blank" rel="noopener" href="https://www.fxiaoke.com/crm/information-40755.html">https://www.fxiaoke.com/crm/information-40755.html</a></p>
+<h2 id="2-以太坊"><a href="#2-以太坊" class="headerlink" title="2. 以太坊"></a>2. 以太坊</h2><p>一种支持智能合约的公共区块链平台，其原生加密货币以太币是全球市值第二高的加密货币，仅次于比特币</p>
+<h2 id="3-以太坊账户管理"><a href="#3-以太坊账户管理" class="headerlink" title="3. 以太坊账户管理"></a>3. 以太坊账户管理</h2><p><a target="_blank" rel="noopener" href="https://huweihuang.com/blockchain-notes/ethereum/ethereum-account-management.html">https://huweihuang.com/blockchain-notes/ethereum/ethereum-account-management.html</a></p>
+	
+	</div>
+  <a type="button" href="/2024/02/23/以太坊学习/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/02/23/redis笔试题/" >redis知识点</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-02-23  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Redis是一个广泛使用的高性能键值数据库，它支持多种数据结构如字符串、哈希、列表、集合、有序集合等。在笔试或面试中，关于Redis的问题可能会覆盖基本概念、数据结构、操作命令、内部机制、持久化、安全性、性能优化等多个方面。下面列举一些可能遇到的Redis笔试题目：</p>
+<h3 id="1-Redis基本概念与数据结构"><a href="#1-Redis基本概念与数据结构" class="headerlink" title="1. Redis基本概念与数据结构"></a>1. <strong>Redis基本概念与数据结构</strong></h3><ol>
+<li>什么是Redis？它的主要特点是什么？</li>
+<li>描述Redis支持的数据类型及其用途。</li>
+<li>Redis如何实现持久化？区别<code>RDB</code>和<code>AOF</code>持久化方式。</li>
+<li>Redis的过期键是如何处理的？</li>
+</ol>
+<h3 id="2-操作与命令"><a href="#2-操作与命令" class="headerlink" title="2. 操作与命令"></a>2. <strong>操作与命令</strong></h3><ol>
+<li>如何在Redis中设置键的过期时间？举例说明。</li>
+<li>解释<code>LPUSH</code>和<code>RPUSH</code>命令的区别。</li>
+<li><code>SETNX</code>命令是做什么的？它如何用于实现分布式锁？</li>
+<li>解释<code>ZADD</code>和<code>ZRANK</code>命令的作用。</li>
+</ol>
+<h3 id="3-内部机制与性能"><a href="#3-内部机制与性能" class="headerlink" title="3. 内部机制与性能"></a>3. <strong>内部机制与性能</strong></h3><ol>
+<li>Redis是单线程模型还是多线程模型？解释它如何处理并发。</li>
+<li>Redis的发布订阅模式是什么？它的应用场景有哪些？</li>
+<li>Redis事务是如何工作的？<code>MULTI</code>、<code>EXEC</code>、<code>WATCH</code>命令是做什么的？</li>
+<li>Redis如何实现高可用性？简述<code>Redis Sentinel</code>和<code>Redis Cluster</code>的区别。</li>
+</ol>
+<h3 id="4-持久化、安全性与优化"><a href="#4-持久化、安全性与优化" class="headerlink" title="4. 持久化、安全性与优化"></a>4. <strong>持久化、安全性与优化</strong></h3><ol>
+<li>描述Redis的<code>RDB</code>持久化过程和触发条件。</li>
+<li>如何优化Redis的内存使用？</li>
+<li>Redis安全性问题及其解决方案有哪些？</li>
+<li>Redis的主从复制是如何工作的？有哪些同步机制？</li>
+</ol>
+<h3 id="5-实际应用与案例分析"><a href="#5-实际应用与案例分析" class="headerlink" title="5. 实际应用与案例分析"></a>5. <strong>实际应用与案例分析</strong></h3>
+	
+	</div>
+  <a type="button" href="/2024/02/23/redis笔试题/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/02/23/跨域/" >Access-control-Allow-Origin响应头为什么会生效</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-02-23  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p><code>Access-Control-Allow-Origin</code> 是一个HTTP响应头，用于指示允许访问资源的域（origin）。当服务器在HTTP响应中包含了 <code>Access-Control-Allow-Origin</code> 头部，并设置了合适的值时，浏览器将会根据这个设置来确定是否允许前端页面对该资源进行跨域访问。</p>
+<p>具体而言，如果服务器设置了 <code>Access-Control-Allow-Origin: https://www.example.com</code>，那么仅来自 <a target="_blank" rel="noopener" href="https://www.example.com/">https://www.example.com</a> 的请求才会被允许访问资源。如果请求来自其他域，浏览器会阻止对该资源的访问，从而实现了跨域访问的控制。</p>
+<p>这种限制是由浏览器实施的，因为浏览器遵循同源策略（Same-origin policy），发送post请求前会先发一个options请求，浏览器会先检查并遵循服务器返回的 <code>Access-Control-Allow-Origin</code> 头部的设定，从而确保跨域请求的安全性。</p>
+<p>总之，<code>Access-Control-Allow-Origin</code> 头部生效是因为浏览器会根据这个设置来决定是否允许特定域的前端页面对资源进行跨域访问，从而保障了相应的安全策略得以执行。</p>
+
+	
+	</div>
+  <a type="button" href="/2024/02/23/跨域/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/02/23/jwttoken/" >什么是jwttoken</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-02-23  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>JWT（JSON Web Token）是一种开放标准（RFC 7519），用于在两方之间安全地传递信息。它通常用于身份验证和信息交换，特别是在Web应用程序中。JWT的核心优点是它的紧凑性和自包含性，让它成为Web环境中理想的令牌格式。</p>
+<p>JWT通常由三部分组成，用点（<code>.</code>）分隔：</p>
+<ol>
+<li><p><strong>Header（头部）</strong>：它是一个JSON对象，描述了令牌的类型（通常是JWT）以及使用的签名或加密算法（如HMAC、SHA256或RSA）。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;alg&quot;: &quot;HS256&quot;,</span><br><span class="line">  &quot;typ&quot;: &quot;JWT&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Payload（有效载荷）</strong>：它也是一个JSON对象，包含了实际传输的声明（Claims）。声明是关于实体（通常是用户）和其他数据的语句。有三种类型的声明：注册声明（如iss、exp、sub）、公共声明和私有声明。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;John Doe&quot;,</span><br><span class="line">  &quot;admin&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Signature（签名）</strong>：为了创建签名部分，您必须使用编码后的header和payload以及一个秘密（只有发送者和接收者知道的秘密），使用header中指定的算法进行签名。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plaintext复制代码HMACSHA256(</span><br><span class="line">  base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload),</span><br><span class="line">  secret)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>最终，一个JWT可能看起来像这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制代码eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dPxL6YlOxIlalLJ4HOdl7QzyiqM0gB1qjUmUISZaD10</span><br></pre></td></tr></table></figure>
+
+<p>这个字符串可以在客户端和服务器之间安全地传递，用于验证用户的身份或传递其他信息。服务器可以验证令牌的签名以确认其未被篡改，并从中提取有用的信息。</p>
+<h2 id="jwttoken有哪些使用场景？"><a href="#jwttoken有哪些使用场景？" class="headerlink" title="jwttoken有哪些使用场景？"></a>jwttoken有哪些使用场景？</h2><ol>
+<li><strong>用户认证</strong>：这可能是 JWT 最广泛的应用场景。服务器在用户登录后会生成一个 JWT，并将其发送回客户端，之后客户端会在随后的请求中带上这个 JWT，服务器通过验证 JWT 来确认用户身份。</li>
+<li><strong>跨域身份验证（CORS）</strong>：由于 JWT 是自包含的，因此，一个服务可以轻松识别请求是否已被授权，即便是跨域请求。</li>
+<li><strong>无状态会话</strong>：JWT 由于其自包含性，可以实现无状态的会话机制。服务器不需要在数据库中保持会话状态，有益于减轻服务器压力并提高伸缩性。</li>
+<li><strong>移动设备认证</strong>：JWT 非常适合在移动环境中使用，可以方便地在移动客户端和服务器之间交换认证信息。</li>
+<li><strong>单点登录（SSO）</strong>：JWT 可以很方便地用于单点登录（SSO）场景，即用户在不同的系统和服务中仅需登录一次。</li>
+<li><strong>微服务之间的授权</strong>：在微服务架构中，不同的服务之间可能需要交换受保护的资源。JWT 可以在这些服务之间提供一个高效和安全的认证和授权机制。</li>
+<li><strong>IoT（物联网）设备鉴权</strong>：由于 JWT 的轻量级和灵活性，很适合在物联网环境下对设备进行鉴权。</li>
+<li><strong>访问令牌和刷新令牌</strong>：在基于令牌的认证中，经常用 JWT 生成访问令牌（较短的有效期）和刷新令牌（较长的有效期），在保障系统安全的同时提高用户体验。</li>
+</ol>
+<p>通过这些使用场景，我们可以看到 JWT 作为一种跨平台的授权解决方案，在当今的众多应用和系统之间扮演着关键的角色。它凭借着可伸缩性、简洁和灵活性而广受欢迎。不过，跟任何技术一样，使用 JWT 时也要妥善处理好和安全性相关的考虑，例如：敏感信息的加密处理、令牌的定期轮换、以及恰当地设置过期时间等。这有助于降低潜在的风险并确保系统的安全性。</p>
+<p>在继续深入 JWT 的使用之前，有几点安全最佳实践需要注意：</p>
+	
+	</div>
+  <a type="button" href="/2024/02/23/jwttoken/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/02/23/使用hexo搭建个人博客/" >使用hexo搭建个人博客</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-02-23  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>先安装nodejs</p>
+<p>node -v	#查看node版本<br>npm -v	#查看npm版本<br>npm install -g cnpm –registry&#x3D;<a target="_blank" rel="noopener" href="http://registry.npmmirror.com/">http://registry.npmmirror.com</a>	#安装淘宝的cnpm 管理器<br>cnpm -v	#查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v	#查看hexo版本<br>mkdir blog	#创建blog目录<br>cd blog	 #进入blog目录<br>sudo hexo init 	#生成博客 初始化博客<br>hexo s	#启动本地博客服务<br><a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a>	#本地访问地址<br>hexo n “我的第一篇文章” #创建新的文章<br>#返回blog目录<br>hexo clean #清理<br>hexo g #生成<br>#Github创建一个新的仓库 YourGithubName.github.io<br>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件<br>-—<br>#配置_config.yml </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line"> 		type: git</span><br><span class="line">		  repo: https://github.com/bigbelly-drunkard/bigbelly-drunkard.github.io.git</span><br><span class="line"> 		branch: master</span><br></pre></td></tr></table></figure>
+
+<p>hexo d	#部署到Github仓库里</p>
+<p>走到这一步报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Error: Spawn failed</span><br><span class="line">  at ChildProcess.&lt;anonymous&gt; (/Users/lin/blog/node_modules/.store/hexo-util@2.7.0/node_modules/hexo-util/lib/spawn.js:51:21)</span><br><span class="line">  at ChildProcess.emit (node:events:518:28)</span><br><span class="line">  at ChildProcess._handle.onexit (node:internal/child_process:294:12)</span><br></pre></td></tr></table></figure>
+
+<p>将repo换成gitee，发现没有报错，初步鉴定为网络问题，忧郁gitee白嫖域名需要备案，太麻烦了，还是用github把。</p>
+<p>试了好久终于找到解决方法，将https链接改为ssh连接，参考：<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/2778">https://github.com/hexojs/hexo/issues/2778</a></p>
+<p><img src="/2024/02/23/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/picture1.png" alt="picture1"></p>
+<p>配置_config.yml ，将repo改为ssh链接</p>
+	
+	</div>
+  <a type="button" href="/2024/02/23/使用hexo搭建个人博客/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/02/23/csrf/" >什么是csrf？</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-02-23  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h3 id="CSRF-攻击概述"><a href="#CSRF-攻击概述" class="headerlink" title="CSRF 攻击概述"></a>CSRF 攻击概述</h3><p>CSRF 攻击利用了用户已经认证的身份，在用户不知情的情况下，执行非预期的操作。例如，如果用户登录了银行网站，并且银行网站没有妥善防护 CSRF 攻击，攻击者可以诱导用户（通过点击一个链接或图片等）向银行网站发送恶意请求，如转账请求。</p>
+<h3 id="RESTful-API-和-CSRF"><a href="#RESTful-API-和-CSRF" class="headerlink" title="RESTful API 和 CSRF"></a>RESTful API 和 CSRF</h3><p>RESTful API 通常使用无状态认证机制，如 JWT（JSON Web Tokens）或 OAuth，而不是依赖于传统的基于会话的认证机制（这些机制依赖于浏览器的 Cookie）。这种无状态的认证方式意味着每个请求都必须包含所有必要的认证信息，而不是依赖于浏览器自动发送的 Cookie。</p>
+<ol>
+<li><strong>无状态认证</strong>：使用 JWT 或 OAuth 之类的令牌进行认证的 RESTful API，对 CSRF 攻击具有天然的防御性，因为攻击者无法获取并在恶意请求中使用这些令牌。这与传统的基于 Cookie 的会话认证不同，后者可能自动随请求发送，从而容易受到 CSRF 攻击。</li>
+<li><strong>使用 HTTP 方法</strong>：RESTful API 遵循使用不同 HTTP 方法（如 GET、POST、PUT、DELETE）的最佳实践，其中敏感操作（如更改或删除数据）应该使用 POST、PUT 或 DELETE 方法。由于 CSRF 攻击通常利用 GET 请求或某些情况下的 POST 请求，通过正确使用 HTTP 方法可以降低风险。</li>
+</ol>
+<h3 id="不是完全免疫"><a href="#不是完全免疫" class="headerlink" title="不是完全免疫"></a>不是完全免疫</h3><p>尽管上述因素可以减少 RESTful API 受到 CSRF 攻击的风险，但并不意味着它们完全免疫于 CSRF。例如，如果 RESTful API 错误地允许使用 GET 请求来执行有副作用的操作，那么它们仍然可能受到 CSRF 攻击的威胁。</p>
+<h3 id="防御措施"><a href="#防御措施" class="headerlink" title="防御措施"></a>防御措施</h3><ul>
+<li><strong>令牌基础认证</strong>：确保所有敏感操作都需要一个令牌，该令牌不会自动由浏览器发送（如 JWT）。</li>
+<li><strong>检查请求的来源</strong>：通过检查请求头（如 <code>Origin</code> 和 <code>Referer</code>）来验证请求是否来自预期的来源。</li>
+<li><strong>使用 CSRF 令牌</strong>：对于需要基于 Cookie 的会话认证的场景，可以在请求中加入 CSRF 令牌，确保请求是经过用户明确意图发起的。</li>
+</ul>
+<p>总结，RESTful API 的某些特性和使用的认证机制可能减少了 CSRF 攻击的风险，但开发者仍需采取适当的安全措施来确保其服务的安全。</p>
+	
+	</div>
+  <a type="button" href="/2024/02/23/csrf/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/hexo/">hexo<span>1</span></a></li>
+		
+			<li><a href="/categories/区块链/">区块链<span>1</span></a></li>
+		
+			<li><a href="/categories/数据库/">数据库<span>1</span></a></li>
+		
+			<li><a href="/categories/网络安全/">网络安全<span>4</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/个人博客/">个人博客<span>1</span></a></li>
+		
+			<li><a href="/tags/httponly/">httponly<span>1</span></a></li>
+		
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/以太坊/">以太坊<span>1</span></a></li>
+		
+			<li><a href="/tags/xss/">xss<span>1</span></a></li>
+		
+			<li><a href="/tags/跨域/">跨域<span>1</span></a></li>
+		
+			<li><a href="/tags/身份验证/">身份验证<span>1</span></a></li>
+		
+			<li><a href="/tags/redis/">redis<span>1</span></a></li>
+		
+			<li><a href="/tags/csrf/">csrf<span>1</span></a></li>
+		
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
     
+      <li>
+        <a href="/2024/02/24/httponly原理/" ><i class="fa fa-file-o"></i>httponly原理？</a>
+      </li>
+    
+      <li>
+        <a href="/2024/02/23/以太坊学习/" ><i class="fa fa-file-o"></i>以太坊学习</a>
+      </li>
+    
+      <li>
+        <a href="/2024/02/23/redis笔试题/" ><i class="fa fa-file-o"></i>redis知识点</a>
+      </li>
+    
+      <li>
+        <a href="/2024/02/23/跨域/" ><i class="fa fa-file-o"></i>Access-control-Allow-Origin...</a>
+      </li>
+    
+      <li>
+        <a href="/2024/02/23/jwttoken/" ><i class="fa fa-file-o"></i>什么是jwttoken</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="false"></i><a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" title="" target="_blank"]);">hexo-theme-bithack</a></li>
+	
+	</ul>
+</div>
 
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
 
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 John Doe's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
 
 
 
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
 
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
-</html>
+   </html>
