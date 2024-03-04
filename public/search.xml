@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>httponly原理？</title>
+      <link href="/2024/02/24/httponly%E5%8E%9F%E7%90%86/"/>
+      <url>/2024/02/24/httponly%E5%8E%9F%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h2 id="设置了httponly后无法被javascript调用？那用户怎么发xhr请求？"><a href="#设置了httponly后无法被javascript调用？那用户怎么发xhr请求？" class="headerlink" title="设置了httponly后无法被javascript调用？那用户怎么发xhr请求？"></a>设置了httponly后无法被javascript调用？那用户怎么发xhr请求？</h2><p>浏览器自动发送带有<code>HttpOnly</code>标志的Cookie是其内置功能的一部分，不需要开发者或用户进行特别设置。当服务器通过设置一个带有<code>HttpOnly</code>标志的Cookie响应一个HTTP请求时，这个Cookie会被浏览器存储起来。之后，每当用户的浏览器向同一域名发送请求时，浏览器会自动附加这个域名下的所有Cookie，包括那些标记为<code>HttpOnly</code>的Cookie。</p><h3 id="实现自动发送HttpOnly-Cookie的步骤："><a href="#实现自动发送HttpOnly-Cookie的步骤：" class="headerlink" title="实现自动发送HttpOnly Cookie的步骤："></a>实现自动发送<code>HttpOnly</code> Cookie的步骤：</h3><ol><li><p><strong>服务器设置Cookie</strong>：在服务器处理用户登录或其他需要设置Cookie的请求时，通过响应头<code>Set-Cookie</code>加上<code>HttpOnly</code>标志来设置Cookie。例如：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制代码Set-Cookie: sessionId=abc123; Path=/; HttpOnly</span><br></pre></td></tr></table></figure><p>这告诉浏览器保存这个名为<code>sessionId</code>的Cookie，并在之后的请求中自动发送给服务器，同时因为<code>HttpOnly</code>的存在，这个Cookie不能被客户端JavaScript访问。</p></li><li><p><strong>浏览器存储和管理Cookie</strong>：一旦浏览器接收到这个设置了<code>HttpOnly</code>标志的Cookie，它会将其存储起来，并在之后向相同域名发送的所有请求中自动包含这个Cookie。</p></li><li><p><strong>自动附加Cookie到请求</strong>：用户在与服务器交互时（例如，浏览网页、提交表单等），浏览器会根据需要自动将存储的Cookie附加到向该域名的请求头中，包括那些<code>HttpOnly</code>的Cookie。</p></li></ol><h3 id="重要点："><a href="#重要点：" class="headerlink" title="重要点："></a>重要点：</h3><ul><li><strong>域名和路径</strong>：浏览器只会将Cookie发送给设置它们的相同域名和路径。如果Cookie的<code>Domain</code>和<code>Path</code>属性限制了其作用范围，浏览器会遵守这些规则，只在相应的域和路径下发送Cookie。</li><li><strong>安全和策略</strong>：为增强安全性，建议使用<code>Secure</code>标志（仅通过HTTPS发送Cookie）和<code>SameSite</code>标志（控制Cookie在跨站请求中的发送行为）与<code>HttpOnly</code>标志一同使用。</li></ul><p>通过这种方式，浏览器确保了<code>HttpOnly</code> Cookie的安全性，使其在客户端脚本中不可访问，同时保证了这些Cookie能够在用户与服务器交互时被自动使用，从而支持如会话管理和用户身份验证等功能。</p><p>注：</p><p>httponly能防止客户端js脚本访问和修改凭据，可以在一定程度上防御xss，例如黑客无法做到通过js将用户的cookie发送给自己，但是如果诱导用户自己执行js脚本发送请求，请求还是会发送成功。因此增加了httponly后，黑客实施xss攻击确实更加繁琐了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 网络安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> httponly </tag>
+            
+            <tag> xss </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>以太坊学习</title>
+      <link href="/2024/02/23/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%AD%A6%E4%B9%A0/"/>
+      <url>/2024/02/23/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-什么是区块链"><a href="#1-什么是区块链" class="headerlink" title="1. 什么是区块链"></a>1. 什么是区块链</h2><p><strong>区块链</strong>（英语：blockchain[<a href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-te20151031-1">1]</a>[<a href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-fortune20160515-2">2]</a>[<a href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-nyt20160521-3">3]</a>或block chain[<a href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-primer-4">4]</a>[<a href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-obmh-5">5]</a>）是借由<a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E5%AD%B8">密码学</a>[<a href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-te20151031-1">1]</a>[<a href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-cryptocurrencytech-6">6]</a>与<a href="https://zh.wikipedia.org/wiki/%E5%85%B1%E8%AD%98%E6%A9%9F%E5%88%B6">共识机制</a>等技术建立与存储庞大交易资料链的<a href="https://zh.wikipedia.org/wiki/%E5%B0%8D%E7%AD%89%E7%B6%B2%E8%B7%AF">点对点</a>网络系统。</p><p>每一个区块包含了前一个区块的<a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E9%9B%9C%E6%B9%8A%E5%87%BD%E6%95%B8">加密散列</a>、相应时间戳记以及交易资料（通常用<a href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E6%A0%91">默克尔树</a>（Merkle tree）算法计算的散列值表示）[<a href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-IPblockchain-7">7]</a>，这样的设计使得区块内容具有难以篡改的特性。但如果掌握区块链节点51%以上的运算力，就能操控区块链的内容。如果一开始写入的内容是错误的内容，那么区块链技术只是让错误的内容难以被篡改。[<a href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-storm.mg-8">8]</a></p><p>区块链有哪些应用？</p><ul><li>供应链系统：记录供应链的各个环节实时追踪和记录产品的生产、运输和存储情况</li><li>智能合约：一种自动执行合同的计算机程序，无需第三方介入即可履行合同，无法人为干预</li><li>物联网：构建去中心化的数据库，确保数据一致</li></ul><p>参考<a href="https://www.fxiaoke.com/crm/information-40755.html">https://www.fxiaoke.com/crm/information-40755.html</a></p><h2 id="2-以太坊"><a href="#2-以太坊" class="headerlink" title="2. 以太坊"></a>2. 以太坊</h2><p>一种支持智能合约的公共区块链平台，其原生加密货币以太币是全球市值第二高的加密货币，仅次于比特币</p><h2 id="3-以太坊账户管理"><a href="#3-以太坊账户管理" class="headerlink" title="3. 以太坊账户管理"></a>3. 以太坊账户管理</h2><p><a href="https://huweihuang.com/blockchain-notes/ethereum/ethereum-account-management.html">https://huweihuang.com/blockchain-notes/ethereum/ethereum-account-management.html</a></p><p>出现</p><p>ReferenceError: personal is not defined</p><p>​at <eval>:1:1(0)</eval></p><p>解决办法：</p><p><a href="https://blog.csdn.net/yawei313/article/details/132460948">https://blog.csdn.net/yawei313/article/details/132460948</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 区块链 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 以太坊 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Access-control-Allow-Origin响应头为什么会生效</title>
+      <link href="/2024/02/23/%E8%B7%A8%E5%9F%9F/"/>
+      <url>/2024/02/23/%E8%B7%A8%E5%9F%9F/</url>
+      
+        <content type="html"><![CDATA[<p><code>Access-Control-Allow-Origin</code> 是一个HTTP响应头，用于指示允许访问资源的域（origin）。当服务器在HTTP响应中包含了 <code>Access-Control-Allow-Origin</code> 头部，并设置了合适的值时，浏览器将会根据这个设置来确定是否允许前端页面对该资源进行跨域访问。</p><p>具体而言，如果服务器设置了 <code>Access-Control-Allow-Origin: https://www.example.com</code>，那么仅来自 <a href="https://www.example.com/">https://www.example.com</a> 的请求才会被允许访问资源。如果请求来自其他域，浏览器会阻止对该资源的访问，从而实现了跨域访问的控制。</p><p>这种限制是由浏览器实施的，因为浏览器遵循同源策略（Same-origin policy），发送post请求前会先发一个options请求，浏览器会先检查并遵循服务器返回的 <code>Access-Control-Allow-Origin</code> 头部的设定，从而确保跨域请求的安全性。</p><p>总之，<code>Access-Control-Allow-Origin</code> 头部生效是因为浏览器会根据这个设置来决定是否允许特定域的前端页面对资源进行跨域访问，从而保障了相应的安全策略得以执行。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 网络安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 跨域 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>redis知识点</title>
+      <link href="/2024/02/23/redis%E7%AC%94%E8%AF%95%E9%A2%98/"/>
+      <url>/2024/02/23/redis%E7%AC%94%E8%AF%95%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p>Redis是一个广泛使用的高性能键值数据库，它支持多种数据结构如字符串、哈希、列表、集合、有序集合等。在笔试或面试中，关于Redis的问题可能会覆盖基本概念、数据结构、操作命令、内部机制、持久化、安全性、性能优化等多个方面。下面列举一些可能遇到的Redis笔试题目：</p><h3 id="1-Redis基本概念与数据结构"><a href="#1-Redis基本概念与数据结构" class="headerlink" title="1. Redis基本概念与数据结构"></a>1. <strong>Redis基本概念与数据结构</strong></h3><ol><li>什么是Redis？它的主要特点是什么？</li><li>描述Redis支持的数据类型及其用途。</li><li>Redis如何实现持久化？区别<code>RDB</code>和<code>AOF</code>持久化方式。</li><li>Redis的过期键是如何处理的？</li></ol><h3 id="2-操作与命令"><a href="#2-操作与命令" class="headerlink" title="2. 操作与命令"></a>2. <strong>操作与命令</strong></h3><ol><li>如何在Redis中设置键的过期时间？举例说明。</li><li>解释<code>LPUSH</code>和<code>RPUSH</code>命令的区别。</li><li><code>SETNX</code>命令是做什么的？它如何用于实现分布式锁？</li><li>解释<code>ZADD</code>和<code>ZRANK</code>命令的作用。</li></ol><h3 id="3-内部机制与性能"><a href="#3-内部机制与性能" class="headerlink" title="3. 内部机制与性能"></a>3. <strong>内部机制与性能</strong></h3><ol><li>Redis是单线程模型还是多线程模型？解释它如何处理并发。</li><li>Redis的发布订阅模式是什么？它的应用场景有哪些？</li><li>Redis事务是如何工作的？<code>MULTI</code>、<code>EXEC</code>、<code>WATCH</code>命令是做什么的？</li><li>Redis如何实现高可用性？简述<code>Redis Sentinel</code>和<code>Redis Cluster</code>的区别。</li></ol><h3 id="4-持久化、安全性与优化"><a href="#4-持久化、安全性与优化" class="headerlink" title="4. 持久化、安全性与优化"></a>4. <strong>持久化、安全性与优化</strong></h3><ol><li>描述Redis的<code>RDB</code>持久化过程和触发条件。</li><li>如何优化Redis的内存使用？</li><li>Redis安全性问题及其解决方案有哪些？</li><li>Redis的主从复制是如何工作的？有哪些同步机制？</li></ol><h3 id="5-实际应用与案例分析"><a href="#5-实际应用与案例分析" class="headerlink" title="5. 实际应用与案例分析"></a>5. <strong>实际应用与案例分析</strong></h3><ol><li>你如何使用Redis实现一个高效的计数器？</li><li>如何利用Redis构建一个简单的限流器？</li><li>分析一个实际场景，如何使用Redis缓存来提高应用性能？</li><li>在分布式系统中，如何使用Redis实现会话共享？</li></ol><h3 id="准备答案时的建议"><a href="#准备答案时的建议" class="headerlink" title="准备答案时的建议"></a>准备答案时的建议</h3><ul><li>针对每个问题，尽可能详细地解释概念、原理、命令语法及其使用场景。</li><li>准备一些实际的代码示例或命令用例，以展示你如何在实际项目中应用这些知识。</li><li>保持对最新Redis版本的了解，以便讨论最新特性和改进。</li></ul><p>这些题目只是入门，Redis的应用非常广泛，深入学习和实践可以帮助你在笔试或面试中更加出色。</p><h1 id="答案："><a href="#答案：" class="headerlink" title="答案："></a>答案：</h1><p>这些Redis笔试题覆盖了多个方面，下面我会提供一些简洁的答案。由于Redis是一个深入和广泛的话题，这里的答案旨在给出一个基础的了解，更深入的探索和具体实践可能需要查阅官方文档或其他专业资源。</p><h3 id="1-Redis基本概念与数据结构-1"><a href="#1-Redis基本概念与数据结构-1" class="headerlink" title="1. Redis基本概念与数据结构"></a>1. <strong>Redis基本概念与数据结构</strong></h3><ol><li><strong>Redis是什么？</strong><ul><li>Redis是一个开源的、基于内存的数据结构存储系统，可以用作数据库、缓存和消息中间件。它支持多种类型的数据结构，如字符串、哈希、列表、集合、有序集合等。主要特点包括高性能、支持持久化、事务和各种原子操作。</li></ul></li><li><strong>Redis支持的数据类型</strong><ul><li><strong>字符串（Strings）</strong>：可以包含任何数据类型，包括二进制数据，最大可以存储512MB。</li><li><strong>列表（Lists）</strong>：简单的字符串列表，按照插入顺序排序。</li><li><strong>集合（Sets）</strong>：字符串集合，不允许重复的成员。</li><li><strong>有序集合（Sorted Sets）</strong>：不允许重复的成员，并且每个元素都会关联一个浮点数分数，用以排序。</li><li><strong>哈希（Hashes）</strong>：键值对集合，适用于存储对象。</li><li>**位图（Bitmaps）**和**超日志（HyperLogLogs）**：用于特定类型的计数和统计。</li></ul></li><li><strong>Redis持久化</strong><ul><li><strong>RDB（快照）</strong>：在指定的时间间隔内生成数据集的时间点快照。</li><li><strong>AOF（追加文件）</strong>：记录每个写操作命令，重启时通过重新执行这些命令来恢复数据。</li></ul></li><li><strong>过期键处理</strong><ul><li>Redis使用惰性删除和定期删除策略来处理过期键。只有当访问一个键时，Redis才会检查其是否过期；同时，Redis会定期随机测试一些键，并删除其中的过期键。</li></ul></li></ol><h3 id="2-操作与命令-1"><a href="#2-操作与命令-1" class="headerlink" title="2. 操作与命令"></a>2. <strong>操作与命令</strong></h3><ol><li><strong>设置键的过期时间</strong><ul><li>使用<code>EXPIRE key seconds</code>来设置键的过期时间，例如<code>EXPIRE mykey 120</code>。</li></ul></li><li><strong><code>LPUSH</code>与<code>RPUSH</code></strong><ul><li><code>LPUSH</code>将一个或多个值插入到列表头部。<code>RPUSH</code>将一个或多个值插入到列表尾部。</li></ul></li><li><strong><code>SETNX</code>命令</strong><ul><li><code>SETNX</code>是“SET if Not eXists”的缩写，只有当键不存在时，才对键进行设置操作。它常用于实现分布式锁。</li></ul></li><li><strong><code>ZADD</code>和<code>ZRANK</code></strong><ul><li><code>ZADD</code>向有序集合添加一个或多个成员，<code>ZRANK</code>返回有序集合中指定成员的索引。</li></ul></li></ol><h3 id="3-内部机制与性能-1"><a href="#3-内部机制与性能-1" class="headerlink" title="3. 内部机制与性能"></a>3. <strong>内部机制与性能</strong></h3><ol><li><strong>Redis的线程模型</strong><ul><li>Redis使用单线程模型来处理命令请求，但它也使用多线程进行某些后台操作，如异步I&#x2F;O处理、持久化等。</li></ul></li><li><strong>发布订阅模式</strong><ul><li>Redis的发布订阅模式是一种消息通信模式，允许发布者发送消息而不是直接发送给特定的订阅者。订阅者可以订阅感兴趣的频道接收消息。</li></ul></li><li><strong>Redis事务</strong><ul><li>Redis事务通过<code>MULTI</code>、<code>EXEC</code>、<code>DISCARD</code>和<code>WATCH</code>命令实现。<code>MULTI</code>开始一个事务，<code>EXEC</code>执行所有事务块内的命令，<code>WATCH</code>为乐观锁提供支持。</li></ul></li><li><strong>高可用性</strong><ul><li><strong>Redis Sentinel</strong>提供高可用性，自动监控、通知和故障转移。</li><li><strong>Redis Cluster</strong>提供数据自动分片和高可用性，支持多个Redis节点组成的集群。</li></ul></li></ol><h3 id="4-持久化、安全性与优化-1"><a href="#4-持久化、安全性与优化-1" class="headerlink" title="4. 持久化、安全性与优化"></a>4. <strong>持久化、安全性与优化</strong></h3><ol><li><strong><code>RDB</code>持久化过程</strong><ul><li><code>RDB</code>持久化通过创建数据集的快照来实现，在指定的时间间隔或满足特定条件时触发。</li></ul></li><li><strong>优化内存使用</strong><ul><li>使用适当的数据类型，避免大键值对，启用键过期策略，使用内存淘汰策略。</li></ul></li><li><strong>安全性问题与解决方案</strong><ul><li>通过网络隔离、密码保护、配置文件安全设置等措施提高Redis的安全性。</li></ul></li><li><strong>主从复制</strong><ul><li>主从复制允许一个或多个从节点复制主节点的数据。它支持数据备份、读写分离和高可用性。</li></ul></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> redis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>什么是jwttoken</title>
+      <link href="/2024/02/23/jwttoken/"/>
+      <url>/2024/02/23/jwttoken/</url>
+      
+        <content type="html"><![CDATA[<p>JWT（JSON Web Token）是一种开放标准（RFC 7519），用于在两方之间安全地传递信息。它通常用于身份验证和信息交换，特别是在Web应用程序中。JWT的核心优点是它的紧凑性和自包含性，让它成为Web环境中理想的令牌格式。</p><p>JWT通常由三部分组成，用点（<code>.</code>）分隔：</p><ol><li><p><strong>Header（头部）</strong>：它是一个JSON对象，描述了令牌的类型（通常是JWT）以及使用的签名或加密算法（如HMAC、SHA256或RSA）。</p><p>示例：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;alg&quot;: &quot;HS256&quot;,</span><br><span class="line">  &quot;typ&quot;: &quot;JWT&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p><strong>Payload（有效载荷）</strong>：它也是一个JSON对象，包含了实际传输的声明（Claims）。声明是关于实体（通常是用户）和其他数据的语句。有三种类型的声明：注册声明（如iss、exp、sub）、公共声明和私有声明。</p><p>示例：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;John Doe&quot;,</span><br><span class="line">  &quot;admin&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p><strong>Signature（签名）</strong>：为了创建签名部分，您必须使用编码后的header和payload以及一个秘密（只有发送者和接收者知道的秘密），使用header中指定的算法进行签名。</p><p>示例：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plaintext复制代码HMACSHA256(</span><br><span class="line">  base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload),</span><br><span class="line">  secret)</span><br></pre></td></tr></table></figure></li></ol><p>最终，一个JWT可能看起来像这样：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制代码eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dPxL6YlOxIlalLJ4HOdl7QzyiqM0gB1qjUmUISZaD10</span><br></pre></td></tr></table></figure><p>这个字符串可以在客户端和服务器之间安全地传递，用于验证用户的身份或传递其他信息。服务器可以验证令牌的签名以确认其未被篡改，并从中提取有用的信息。</p><h2 id="jwttoken有哪些使用场景？"><a href="#jwttoken有哪些使用场景？" class="headerlink" title="jwttoken有哪些使用场景？"></a>jwttoken有哪些使用场景？</h2><ol><li><strong>用户认证</strong>：这可能是 JWT 最广泛的应用场景。服务器在用户登录后会生成一个 JWT，并将其发送回客户端，之后客户端会在随后的请求中带上这个 JWT，服务器通过验证 JWT 来确认用户身份。</li><li><strong>跨域身份验证（CORS）</strong>：由于 JWT 是自包含的，因此，一个服务可以轻松识别请求是否已被授权，即便是跨域请求。</li><li><strong>无状态会话</strong>：JWT 由于其自包含性，可以实现无状态的会话机制。服务器不需要在数据库中保持会话状态，有益于减轻服务器压力并提高伸缩性。</li><li><strong>移动设备认证</strong>：JWT 非常适合在移动环境中使用，可以方便地在移动客户端和服务器之间交换认证信息。</li><li><strong>单点登录（SSO）</strong>：JWT 可以很方便地用于单点登录（SSO）场景，即用户在不同的系统和服务中仅需登录一次。</li><li><strong>微服务之间的授权</strong>：在微服务架构中，不同的服务之间可能需要交换受保护的资源。JWT 可以在这些服务之间提供一个高效和安全的认证和授权机制。</li><li><strong>IoT（物联网）设备鉴权</strong>：由于 JWT 的轻量级和灵活性，很适合在物联网环境下对设备进行鉴权。</li><li><strong>访问令牌和刷新令牌</strong>：在基于令牌的认证中，经常用 JWT 生成访问令牌（较短的有效期）和刷新令牌（较长的有效期），在保障系统安全的同时提高用户体验。</li></ol><p>通过这些使用场景，我们可以看到 JWT 作为一种跨平台的授权解决方案，在当今的众多应用和系统之间扮演着关键的角色。它凭借着可伸缩性、简洁和灵活性而广受欢迎。不过，跟任何技术一样，使用 JWT 时也要妥善处理好和安全性相关的考虑，例如：敏感信息的加密处理、令牌的定期轮换、以及恰当地设置过期时间等。这有助于降低潜在的风险并确保系统的安全性。</p><p>在继续深入 JWT 的使用之前，有几点安全最佳实践需要注意：</p><ul><li><strong>安全传输</strong>：始终通过 HTTPS 来传输 JWT，以防止中间人攻击。</li><li><strong>令牌有效期</strong>：为 JWT 设置适当的有效期可以减少被盗用的风险。短期的访问令牌和长期的刷新令牌结合使用是一种常见做法。</li><li><strong>签名算法</strong>：使用强大的签名算法（如 RS256）来保证 JWT 的完整性和认证性。</li><li><strong>敏感信息</strong>：避免在 JWT 中存储敏感信息，因为 JWT 的载荷是可以被解码的，除非它被加密。</li><li><strong>令牌刷新</strong>：实现机制以允许令牌在不影响用户体验的情况下被安全地刷新和替换。</li></ul><p>尽管 JWT 提供了许多便利，但它也引入了特定的安全挑战，如令牌泄露、重放攻击、以及令牌的无状态性导致的撤销问题。因此，开发者在使用 JWT 时需要权衡其便利性和潜在的安全风险，确保采取适当的安全措施。</p><p>最后，理解 JWT 的工作原理和它在系统中如何被使用是至关重要的。这包括了解 JWT 的三个主要部分：头部（Header）、载荷（Payload）、签名（Signature），以及它们是如何结合在一起提供安全保障的。通过合理的设计和实施，JWT 可以在保证安全的同时，为用户和系统之间的交互提供无缝和高效的体验。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 网络安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 身份验证 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用hexo搭建个人博客</title>
+      <link href="/2024/02/23/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
+      <url>/2024/02/23/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+      
+        <content type="html"><![CDATA[<p>先安装nodejs</p><p>node -v#查看node版本<br>npm -v#查看npm版本<br>npm install -g cnpm –registry&#x3D;<a href="http://registry.npmmirror.com/">http://registry.npmmirror.com</a>#安装淘宝的cnpm 管理器<br>cnpm -v#查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v#查看hexo版本<br>mkdir blog#创建blog目录<br>cd blog #进入blog目录<br>sudo hexo init #生成博客 初始化博客<br>hexo s#启动本地博客服务<br><a href="http://localhost:4000/">http://localhost:4000/</a>#本地访问地址<br>hexo n “我的第一篇文章” #创建新的文章<br>#返回blog目录<br>hexo clean #清理<br>hexo g #生成<br>#Github创建一个新的仓库 YourGithubName.github.io<br>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件<br>-—<br>#配置_config.yml </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line"> type: git</span><br><span class="line">  repo: https://github.com/bigbelly-drunkard/bigbelly-drunkard.github.io.git</span><br><span class="line"> branch: master</span><br></pre></td></tr></table></figure><p>hexo d#部署到Github仓库里</p><p>走到这一步报错：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Error: Spawn failed</span><br><span class="line">  at ChildProcess.&lt;anonymous&gt; (/Users/lin/blog/node_modules/.store/hexo-util@2.7.0/node_modules/hexo-util/lib/spawn.js:51:21)</span><br><span class="line">  at ChildProcess.emit (node:events:518:28)</span><br><span class="line">  at ChildProcess._handle.onexit (node:internal/child_process:294:12)</span><br></pre></td></tr></table></figure><p>将repo换成gitee，发现没有报错，初步鉴定为网络问题，忧郁gitee白嫖域名需要备案，太麻烦了，还是用github把。</p><p>试了好久终于找到解决方法，将https链接改为ssh连接，参考：<a href="https://github.com/hexojs/hexo/issues/2778">https://github.com/hexojs/hexo/issues/2778</a></p><p><img src="/2024/02/23/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/picture1.png" alt="picture1"></p><p>配置_config.yml ，将repo改为ssh链接</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line"> repo: git@github.com:bigbelly-drunkard/bigbelly-drunkard.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><p>本地生成ssh公钥</p><p>ssh-keygen -t rsa -b 4096 -C “你的github邮箱”</p><p>一路点确定</p><p>生成的公钥默认存在&#x2F;var&#x2F;root&#x2F;.ssh&#x2F;id_rsa下，将id_rsa.pub的内容拷贝的github上，点击Deploy keys &gt;&gt; Add deploy key：<img src="/2024/02/23/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/picture2.png" alt="picture2"></p><p>Hero d 部署博客，成功</p><p><a href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #访问这个地址可以查看博客</p><p>#修改hexo根目录下的 _config.yml 文件 ： theme: yilia</p><p>hexo c#清理一下<br>hexo g#生成<br>hexo d#部署到远程Github仓库<br><a href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #查看博客</p><p>hexo无法显示图片解决方法：</p><p><a href="https://blog.csdn.net/weixin_44999716/article/details/112401495">https://blog.csdn.net/weixin_44999716/article/details/112401495</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> 个人博客 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>什么是csrf？</title>
+      <link href="/2024/02/23/csrf/"/>
+      <url>/2024/02/23/csrf/</url>
+      
+        <content type="html"><![CDATA[<h3 id="CSRF-攻击概述"><a href="#CSRF-攻击概述" class="headerlink" title="CSRF 攻击概述"></a>CSRF 攻击概述</h3><p>CSRF 攻击利用了用户已经认证的身份，在用户不知情的情况下，执行非预期的操作。例如，如果用户登录了银行网站，并且银行网站没有妥善防护 CSRF 攻击，攻击者可以诱导用户（通过点击一个链接或图片等）向银行网站发送恶意请求，如转账请求。</p><h3 id="RESTful-API-和-CSRF"><a href="#RESTful-API-和-CSRF" class="headerlink" title="RESTful API 和 CSRF"></a>RESTful API 和 CSRF</h3><p>RESTful API 通常使用无状态认证机制，如 JWT（JSON Web Tokens）或 OAuth，而不是依赖于传统的基于会话的认证机制（这些机制依赖于浏览器的 Cookie）。这种无状态的认证方式意味着每个请求都必须包含所有必要的认证信息，而不是依赖于浏览器自动发送的 Cookie。</p><ol><li><strong>无状态认证</strong>：使用 JWT 或 OAuth 之类的令牌进行认证的 RESTful API，对 CSRF 攻击具有天然的防御性，因为攻击者无法获取并在恶意请求中使用这些令牌。这与传统的基于 Cookie 的会话认证不同，后者可能自动随请求发送，从而容易受到 CSRF 攻击。</li><li><strong>使用 HTTP 方法</strong>：RESTful API 遵循使用不同 HTTP 方法（如 GET、POST、PUT、DELETE）的最佳实践，其中敏感操作（如更改或删除数据）应该使用 POST、PUT 或 DELETE 方法。由于 CSRF 攻击通常利用 GET 请求或某些情况下的 POST 请求，通过正确使用 HTTP 方法可以降低风险。</li></ol><h3 id="不是完全免疫"><a href="#不是完全免疫" class="headerlink" title="不是完全免疫"></a>不是完全免疫</h3><p>尽管上述因素可以减少 RESTful API 受到 CSRF 攻击的风险，但并不意味着它们完全免疫于 CSRF。例如，如果 RESTful API 错误地允许使用 GET 请求来执行有副作用的操作，那么它们仍然可能受到 CSRF 攻击的威胁。</p><h3 id="防御措施"><a href="#防御措施" class="headerlink" title="防御措施"></a>防御措施</h3><ul><li><strong>令牌基础认证</strong>：确保所有敏感操作都需要一个令牌，该令牌不会自动由浏览器发送（如 JWT）。</li><li><strong>检查请求的来源</strong>：通过检查请求头（如 <code>Origin</code> 和 <code>Referer</code>）来验证请求是否来自预期的来源。</li><li><strong>使用 CSRF 令牌</strong>：对于需要基于 Cookie 的会话认证的场景，可以在请求中加入 CSRF 令牌，确保请求是经过用户明确意图发起的。</li></ul><p>总结，RESTful API 的某些特性和使用的认证机制可能减少了 CSRF 攻击的风险，但开发者仍需采取适当的安全措施来确保其服务的安全。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 网络安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> csrf </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

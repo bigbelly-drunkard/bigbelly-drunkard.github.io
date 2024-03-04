@@ -1,0 +1,27 @@
+# add this config to disable category and tag page split (must)
+category_generator:
+  per_page: 0
+
+tag_generator:
+   per_page: 0
+
+# add this config if you want to change default excerpt lines (*optional*)
+excerpt:
+  depth: 10
+  excerpt_excludes: []
+  more_excludes: []
+  hideWholePostExcerpts: true
+
+# enable highlight (*optional but suggest*)
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
