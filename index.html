@@ -204,7 +204,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/03/05/使用hexo搭建个人博客/" >使用hexo搭建个人博客</a>
+			<a href="/2024/03/05/jwttoken/" >什么是jwttoken</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -218,58 +218,40 @@
   <div class="row">
 	
 	
-		<p>先安装nodejs</p>
-<p>node -v	#查看node版本<br>npm -v	#查看npm版本<br>npm install -g cnpm –registry&#x3D;<a target="_blank" rel="noopener" href="http://registry.npmmirror.com/">http://registry.npmmirror.com</a>	#安装淘宝的cnpm 管理器<br>cnpm -v	#查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v	#查看hexo版本<br>mkdir blog	#创建blog目录<br>cd blog	 #进入blog目录<br>sudo hexo init 	#生成博客 初始化博客<br>hexo s	#启动本地博客服务<br><a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a>	#本地访问地址<br>hexo n “我的第一篇文章” #创建新的文章<br>#返回blog目录<br>hexo clean #清理<br>hexo g #生成<br>#Github创建一个新的仓库 YourGithubName.github.io<br>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件<br>-—<br>#配置_config.yml </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line"> 		type: git</span><br><span class="line">		  repo: https://github.com/bigbelly-drunkard/bigbelly-drunkard.github.io.git</span><br><span class="line"> 		branch: master</span><br></pre></td></tr></table></figure>
+		<p>JWT（JSON Web Token）是一种开放标准（RFC 7519），用于在两方之间安全地传递信息。它通常用于身份验证和信息交换，特别是在Web应用程序中。JWT的核心优点是它的紧凑性和自包含性，让它成为Web环境中理想的令牌格式。</p>
+<p>JWT通常由三部分组成，用点（<code>.</code>）分隔：</p>
+<ol>
+<li><p><strong>Header（头部）</strong>：它是一个JSON对象，描述了令牌的类型（通常是JWT）以及使用的签名或加密算法（如HMAC、SHA256或RSA）。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;alg&quot;: &quot;HS256&quot;,</span><br><span class="line">  &quot;typ&quot;: &quot;JWT&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Payload（有效载荷）</strong>：它也是一个JSON对象，包含了实际传输的声明（Claims）。声明是关于实体（通常是用户）和其他数据的语句。有三种类型的声明：注册声明（如iss、exp、sub）、公共声明和私有声明。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;John Doe&quot;,</span><br><span class="line">  &quot;admin&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Signature（签名）</strong>：为了创建签名部分，您必须使用编码后的header和payload以及一个秘密（只有发送者和接收者知道的秘密），使用header中指定的算法进行签名。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plaintext复制代码HMACSHA256(</span><br><span class="line">  base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload),</span><br><span class="line">  secret)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>最终，一个JWT可能看起来像这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制代码eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dPxL6YlOxIlalLJ4HOdl7QzyiqM0gB1qjUmUISZaD10</span><br></pre></td></tr></table></figure>
 
-<p>hexo d	#部署到Github仓库里</p>
-<p>走到这一步报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Error: Spawn failed</span><br><span class="line">  at ChildProcess.&lt;anonymous&gt; (/Users/lin/blog/node_modules/.store/hexo-util@2.7.0/node_modules/hexo-util/lib/spawn.js:51:21)</span><br><span class="line">  at ChildProcess.emit (node:events:518:28)</span><br><span class="line">  at ChildProcess._handle.onexit (node:internal/child_process:294:12)</span><br></pre></td></tr></table></figure>
-
-<p>将repo换成gitee，发现没有报错，初步鉴定为网络问题，忧郁gitee白嫖域名需要备案，太麻烦了，还是用github把。</p>
-<p>试了好久终于找到解决方法，将https链接改为ssh连接，参考：<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/2778">https://github.com/hexojs/hexo/issues/2778</a></p>
-<p><img src="/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/02/23/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/picture1.png" alt="picture1"></p>
-<p>配置_config.yml ，将repo改为ssh链接</p>
+<p>这个字符串可以在客户端和服务器之间安全地传递，用于验证用户的身份或传递其他信息。服务器可以验证令牌的签名以确认其未被篡改，并从中提取有用的信息。</p>
+<h2 id="jwttoken有哪些使用场景？"><a href="#jwttoken有哪些使用场景？" class="headerlink" title="jwttoken有哪些使用场景？"></a>jwttoken有哪些使用场景？</h2><ol>
+<li><strong>用户认证</strong>：这可能是 JWT 最广泛的应用场景。服务器在用户登录后会生成一个 JWT，并将其发送回客户端，之后客户端会在随后的请求中带上这个 JWT，服务器通过验证 JWT 来确认用户身份。</li>
+<li><strong>跨域身份验证（CORS）</strong>：由于 JWT 是自包含的，因此，一个服务可以轻松识别请求是否已被授权，即便是跨域请求。</li>
+<li><strong>无状态会话</strong>：JWT 由于其自包含性，可以实现无状态的会话机制。服务器不需要在数据库中保持会话状态，有益于减轻服务器压力并提高伸缩性。</li>
+<li><strong>移动设备认证</strong>：JWT 非常适合在移动环境中使用，可以方便地在移动客户端和服务器之间交换认证信息。</li>
+<li><strong>单点登录（SSO）</strong>：JWT 可以很方便地用于单点登录（SSO）场景，即用户在不同的系统和服务中仅需登录一次。</li>
+<li><strong>微服务之间的授权</strong>：在微服务架构中，不同的服务之间可能需要交换受保护的资源。JWT 可以在这些服务之间提供一个高效和安全的认证和授权机制。</li>
+<li><strong>IoT（物联网）设备鉴权</strong>：由于 JWT 的轻量级和灵活性，很适合在物联网环境下对设备进行鉴权。</li>
+<li><strong>访问令牌和刷新令牌</strong>：在基于令牌的认证中，经常用 JWT 生成访问令牌（较短的有效期）和刷新令牌（较长的有效期），在保障系统安全的同时提高用户体验。</li>
+</ol>
+<p>通过这些使用场景，我们可以看到 JWT 作为一种跨平台的授权解决方案，在当今的众多应用和系统之间扮演着关键的角色。它凭借着可伸缩性、简洁和灵活性而广受欢迎。不过，跟任何技术一样，使用 JWT 时也要妥善处理好和安全性相关的考虑，例如：敏感信息的加密处理、令牌的定期轮换、以及恰当地设置过期时间等。这有助于降低潜在的风险并确保系统的安全性。</p>
+<p>在继续深入 JWT 的使用之前，有几点安全最佳实践需要注意：</p>
 	
 	</div>
-  <a type="button" href="/2024/03/05/使用hexo搭建个人博客/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/03/05/以太坊学习/" >以太坊学习</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-03-05  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="1-什么是区块链"><a href="#1-什么是区块链" class="headerlink" title="1. 什么是区块链"></a>1. 什么是区块链</h2><p><strong>区块链</strong>（英语：blockchain[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-te20151031-1">1]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-fortune20160515-2">2]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-nyt20160521-3">3]</a>或block chain[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-primer-4">4]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-obmh-5">5]</a>）是借由<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E5%AD%B8">密码学</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-te20151031-1">1]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-cryptocurrencytech-6">6]</a>与<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%85%B1%E8%AD%98%E6%A9%9F%E5%88%B6">共识机制</a>等技术建立与存储庞大交易资料链的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%B0%8D%E7%AD%89%E7%B6%B2%E8%B7%AF">点对点</a>网络系统。</p>
-<p>每一个区块包含了前一个区块的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E9%9B%9C%E6%B9%8A%E5%87%BD%E6%95%B8">加密散列</a>、相应时间戳记以及交易资料（通常用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E6%A0%91">默克尔树</a>（Merkle tree）算法计算的散列值表示）[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-IPblockchain-7">7]</a>，这样的设计使得区块内容具有难以篡改的特性。但如果掌握区块链节点51%以上的运算力，就能操控区块链的内容。如果一开始写入的内容是错误的内容，那么区块链技术只是让错误的内容难以被篡改。[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-storm.mg-8">8]</a></p>
-<p>区块链有哪些应用？</p>
-<ul>
-<li>供应链系统：记录供应链的各个环节实时追踪和记录产品的生产、运输和存储情况</li>
-<li>智能合约：一种自动执行合同的计算机程序，无需第三方介入即可履行合同，无法人为干预</li>
-<li>物联网：构建去中心化的数据库，确保数据一致</li>
-</ul>
-<p>参考<a target="_blank" rel="noopener" href="https://www.fxiaoke.com/crm/information-40755.html">https://www.fxiaoke.com/crm/information-40755.html</a></p>
-<h2 id="2-以太坊"><a href="#2-以太坊" class="headerlink" title="2. 以太坊"></a>2. 以太坊</h2><p>一种支持智能合约的公共区块链平台，其原生加密货币以太币是全球市值第二高的加密货币，仅次于比特币</p>
-<h2 id="3-以太坊账户管理"><a href="#3-以太坊账户管理" class="headerlink" title="3. 以太坊账户管理"></a>3. 以太坊账户管理</h2><p><a target="_blank" rel="noopener" href="https://huweihuang.com/blockchain-notes/ethereum/ethereum-account-management.html">https://huweihuang.com/blockchain-notes/ethereum/ethereum-account-management.html</a></p>
-	
-	</div>
-  <a type="button" href="/2024/03/05/以太坊学习/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2024/03/05/jwttoken/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -331,7 +313,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/03/05/jwttoken/" >什么是jwttoken</a>
+			<a href="/2024/03/05/以太坊学习/" >以太坊学习</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -345,40 +327,58 @@
   <div class="row">
 	
 	
-		<p>JWT（JSON Web Token）是一种开放标准（RFC 7519），用于在两方之间安全地传递信息。它通常用于身份验证和信息交换，特别是在Web应用程序中。JWT的核心优点是它的紧凑性和自包含性，让它成为Web环境中理想的令牌格式。</p>
-<p>JWT通常由三部分组成，用点（<code>.</code>）分隔：</p>
-<ol>
-<li><p><strong>Header（头部）</strong>：它是一个JSON对象，描述了令牌的类型（通常是JWT）以及使用的签名或加密算法（如HMAC、SHA256或RSA）。</p>
-<p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;alg&quot;: &quot;HS256&quot;,</span><br><span class="line">  &quot;typ&quot;: &quot;JWT&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Payload（有效载荷）</strong>：它也是一个JSON对象，包含了实际传输的声明（Claims）。声明是关于实体（通常是用户）和其他数据的语句。有三种类型的声明：注册声明（如iss、exp、sub）、公共声明和私有声明。</p>
-<p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;John Doe&quot;,</span><br><span class="line">  &quot;admin&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Signature（签名）</strong>：为了创建签名部分，您必须使用编码后的header和payload以及一个秘密（只有发送者和接收者知道的秘密），使用header中指定的算法进行签名。</p>
-<p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plaintext复制代码HMACSHA256(</span><br><span class="line">  base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload),</span><br><span class="line">  secret)</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>最终，一个JWT可能看起来像这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制代码eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dPxL6YlOxIlalLJ4HOdl7QzyiqM0gB1qjUmUISZaD10</span><br></pre></td></tr></table></figure>
-
-<p>这个字符串可以在客户端和服务器之间安全地传递，用于验证用户的身份或传递其他信息。服务器可以验证令牌的签名以确认其未被篡改，并从中提取有用的信息。</p>
-<h2 id="jwttoken有哪些使用场景？"><a href="#jwttoken有哪些使用场景？" class="headerlink" title="jwttoken有哪些使用场景？"></a>jwttoken有哪些使用场景？</h2><ol>
-<li><strong>用户认证</strong>：这可能是 JWT 最广泛的应用场景。服务器在用户登录后会生成一个 JWT，并将其发送回客户端，之后客户端会在随后的请求中带上这个 JWT，服务器通过验证 JWT 来确认用户身份。</li>
-<li><strong>跨域身份验证（CORS）</strong>：由于 JWT 是自包含的，因此，一个服务可以轻松识别请求是否已被授权，即便是跨域请求。</li>
-<li><strong>无状态会话</strong>：JWT 由于其自包含性，可以实现无状态的会话机制。服务器不需要在数据库中保持会话状态，有益于减轻服务器压力并提高伸缩性。</li>
-<li><strong>移动设备认证</strong>：JWT 非常适合在移动环境中使用，可以方便地在移动客户端和服务器之间交换认证信息。</li>
-<li><strong>单点登录（SSO）</strong>：JWT 可以很方便地用于单点登录（SSO）场景，即用户在不同的系统和服务中仅需登录一次。</li>
-<li><strong>微服务之间的授权</strong>：在微服务架构中，不同的服务之间可能需要交换受保护的资源。JWT 可以在这些服务之间提供一个高效和安全的认证和授权机制。</li>
-<li><strong>IoT（物联网）设备鉴权</strong>：由于 JWT 的轻量级和灵活性，很适合在物联网环境下对设备进行鉴权。</li>
-<li><strong>访问令牌和刷新令牌</strong>：在基于令牌的认证中，经常用 JWT 生成访问令牌（较短的有效期）和刷新令牌（较长的有效期），在保障系统安全的同时提高用户体验。</li>
-</ol>
-<p>通过这些使用场景，我们可以看到 JWT 作为一种跨平台的授权解决方案，在当今的众多应用和系统之间扮演着关键的角色。它凭借着可伸缩性、简洁和灵活性而广受欢迎。不过，跟任何技术一样，使用 JWT 时也要妥善处理好和安全性相关的考虑，例如：敏感信息的加密处理、令牌的定期轮换、以及恰当地设置过期时间等。这有助于降低潜在的风险并确保系统的安全性。</p>
-<p>在继续深入 JWT 的使用之前，有几点安全最佳实践需要注意：</p>
+		<h2 id="1-什么是区块链"><a href="#1-什么是区块链" class="headerlink" title="1. 什么是区块链"></a>1. 什么是区块链</h2><p><strong>区块链</strong>（英语：blockchain[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-te20151031-1">1]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-fortune20160515-2">2]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-nyt20160521-3">3]</a>或block chain[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-primer-4">4]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-obmh-5">5]</a>）是借由<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E5%AD%B8">密码学</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-te20151031-1">1]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-cryptocurrencytech-6">6]</a>与<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%85%B1%E8%AD%98%E6%A9%9F%E5%88%B6">共识机制</a>等技术建立与存储庞大交易资料链的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%B0%8D%E7%AD%89%E7%B6%B2%E8%B7%AF">点对点</a>网络系统。</p>
+<p>每一个区块包含了前一个区块的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E9%9B%9C%E6%B9%8A%E5%87%BD%E6%95%B8">加密散列</a>、相应时间戳记以及交易资料（通常用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E6%A0%91">默克尔树</a>（Merkle tree）算法计算的散列值表示）[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-IPblockchain-7">7]</a>，这样的设计使得区块内容具有难以篡改的特性。但如果掌握区块链节点51%以上的运算力，就能操控区块链的内容。如果一开始写入的内容是错误的内容，那么区块链技术只是让错误的内容难以被篡改。[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE#cite_note-storm.mg-8">8]</a></p>
+<p>区块链有哪些应用？</p>
+<ul>
+<li>供应链系统：记录供应链的各个环节实时追踪和记录产品的生产、运输和存储情况</li>
+<li>智能合约：一种自动执行合同的计算机程序，无需第三方介入即可履行合同，无法人为干预</li>
+<li>物联网：构建去中心化的数据库，确保数据一致</li>
+</ul>
+<p>参考<a target="_blank" rel="noopener" href="https://www.fxiaoke.com/crm/information-40755.html">https://www.fxiaoke.com/crm/information-40755.html</a></p>
+<h2 id="2-以太坊"><a href="#2-以太坊" class="headerlink" title="2. 以太坊"></a>2. 以太坊</h2><p>一种支持智能合约的公共区块链平台，其原生加密货币以太币是全球市值第二高的加密货币，仅次于比特币</p>
+<h2 id="3-以太坊账户管理"><a href="#3-以太坊账户管理" class="headerlink" title="3. 以太坊账户管理"></a>3. 以太坊账户管理</h2><p><a target="_blank" rel="noopener" href="https://huweihuang.com/blockchain-notes/ethereum/ethereum-account-management.html">https://huweihuang.com/blockchain-notes/ethereum/ethereum-account-management.html</a></p>
 	
 	</div>
-  <a type="button" href="/2024/03/05/jwttoken/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2024/03/05/以太坊学习/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/03/05/使用hexo搭建个人博客/" >使用hexo搭建个人博客</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-03-05  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>先安装nodejs</p>
+<p>node -v	#查看node版本<br>npm -v	#查看npm版本<br>npm install -g cnpm –registry&#x3D;<a target="_blank" rel="noopener" href="http://registry.npmmirror.com/">http://registry.npmmirror.com</a>	#安装淘宝的cnpm 管理器<br>cnpm -v	#查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v	#查看hexo版本<br>mkdir blog	#创建blog目录<br>cd blog	 #进入blog目录<br>sudo hexo init 	#生成博客 初始化博客<br>hexo s	#启动本地博客服务<br><a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a>	#本地访问地址<br>hexo n “我的第一篇文章” #创建新的文章<br>#返回blog目录<br>hexo clean #清理<br>hexo g #生成<br>#Github创建一个新的仓库 YourGithubName.github.io<br>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件<br>-—<br>#配置_config.yml </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line"> 		type: git</span><br><span class="line">		  repo: https://github.com/bigbelly-drunkard/bigbelly-drunkard.github.io.git</span><br><span class="line"> 		branch: master</span><br></pre></td></tr></table></figure>
+
+<p>hexo d	#部署到Github仓库里</p>
+<p>走到这一步报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Error: Spawn failed</span><br><span class="line">  at ChildProcess.&lt;anonymous&gt; (/Users/lin/blog/node_modules/.store/hexo-util@2.7.0/node_modules/hexo-util/lib/spawn.js:51:21)</span><br><span class="line">  at ChildProcess.emit (node:events:518:28)</span><br><span class="line">  at ChildProcess._handle.onexit (node:internal/child_process:294:12)</span><br></pre></td></tr></table></figure>
+
+<p>将repo换成gitee，发现没有报错，初步鉴定为网络问题，忧郁gitee白嫖域名需要备案，太麻烦了，还是用github把。</p>
+<p>试了好久终于找到解决方法，将https链接改为ssh连接，参考：<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/2778">https://github.com/hexojs/hexo/issues/2778</a></p>
+<p><img src="/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/picture1.png" alt="picture1"></p>
+<p>配置_config.yml ，将repo改为ssh链接</p>
+	
+	</div>
+  <a type="button" href="/2024/03/05/使用hexo搭建个人博客/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -521,23 +521,23 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
+			<li><a href="/tags/跨域/">跨域<span>1</span></a></li>
+		
+			<li><a href="/tags/xss/">xss<span>1</span></a></li>
+		
 			<li><a href="/tags/httponly/">httponly<span>1</span></a></li>
 		
-			<li><a href="/tags/跨域/">跨域<span>1</span></a></li>
+			<li><a href="/tags/redis/">redis<span>1</span></a></li>
+		
+			<li><a href="/tags/hexo/">hexo<span>2</span></a></li>
 		
 			<li><a href="/tags/csrf/">csrf<span>1</span></a></li>
 		
-			<li><a href="/tags/redis/">redis<span>1</span></a></li>
+			<li><a href="/tags/以太坊/">以太坊<span>1</span></a></li>
 		
 			<li><a href="/tags/身份验证/">身份验证<span>1</span></a></li>
 		
 			<li><a href="/tags/个人博客/">个人博客<span>1</span></a></li>
-		
-			<li><a href="/tags/以太坊/">以太坊<span>1</span></a></li>
-		
-			<li><a href="/tags/hexo/">hexo<span>2</span></a></li>
-		
-			<li><a href="/tags/xss/">xss<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -559,15 +559,15 @@
       </li>
     
       <li>
-        <a href="/2024/03/05/使用hexo搭建个人博客/" ><i class="fa fa-file-o"></i>使用hexo搭建个人博客</a>
-      </li>
-    
-      <li>
-        <a href="/2024/03/05/以太坊学习/" ><i class="fa fa-file-o"></i>以太坊学习</a>
+        <a href="/2024/03/05/jwttoken/" ><i class="fa fa-file-o"></i>什么是jwttoken</a>
       </li>
     
       <li>
         <a href="/2024/03/05/redis笔试题/" ><i class="fa fa-file-o"></i>redis知识点</a>
+      </li>
+    
+      <li>
+        <a href="/2024/03/05/以太坊学习/" ><i class="fa fa-file-o"></i>以太坊学习</a>
       </li>
     
   </ul>

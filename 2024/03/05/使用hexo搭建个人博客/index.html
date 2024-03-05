@@ -158,14 +158,14 @@ hexo d	#部署到Github仓库里
 
 <p>将repo换成gitee，发现没有报错，初步鉴定为网络问题，忧郁gitee白嫖域名需要备案，太麻烦了，还是用github把。</p>
 <p>试了好久终于找到解决方法，将https链接改为ssh连接，参考：<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/2778">https://github.com/hexojs/hexo/issues/2778</a></p>
-<p><img src="/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/02/23/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/picture1.png" alt="picture1"></p>
+<p><img src="/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/picture1.png" alt="picture1"></p>
 <p>配置_config.yml ，将repo改为ssh链接</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">	deploy:</span><br><span class="line">  	type: git</span><br><span class="line"> 		repo: git@github.com:bigbelly-drunkard/bigbelly-drunkard.github.io.git</span><br><span class="line">  	branch: master</span><br></pre></td></tr></table></figure>
 
 <p>本地生成ssh公钥</p>
 <p>ssh-keygen -t rsa -b 4096 -C “你的github邮箱”</p>
 <p>一路点确定</p>
-<p>生成的公钥默认存在&#x2F;var&#x2F;root&#x2F;.ssh&#x2F;id_rsa下，将id_rsa.pub的内容拷贝的github上，点击Deploy keys &gt;&gt; Add deploy key：<img src="/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/02/23/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/picture2.png" alt="picture2"></p>
+<p>生成的公钥默认存在&#x2F;var&#x2F;root&#x2F;.ssh&#x2F;id_rsa下，将id_rsa.pub的内容拷贝的github上，点击Deploy keys &gt;&gt; Add deploy key：<img src="/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/picture2.png" alt="picture2"></p>
 <p>Hero d 部署博客，成功</p>
 <p><a target="_blank" rel="noopener" href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #访问这个地址可以查看博客</p>
 <p>#修改hexo根目录下的 _config.yml 文件 ： theme: yilia</p>
@@ -189,13 +189,13 @@ hexo d	#部署到Github仓库里
 
     
     
-    <a href="/2024/03/05/跨域/" type="button" class="btn btn-default"><i
+    <a href="/2024/03/05/以太坊学习/" type="button" class="btn btn-default"><i
                 class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-    <a href="/2024/03/05/以太坊学习/" type="button" class="btn btn-default ">Next<i
+    <a href="/2024/03/05/csrf/" type="button" class="btn btn-default ">Next<i
                 class="fa fa-arrow-circle-o-right"></i></a>
     
 
