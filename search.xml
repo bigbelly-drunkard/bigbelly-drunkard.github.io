@@ -79,33 +79,6 @@
     
     
     <entry>
-      <title>使用hexo搭建个人博客</title>
-      <link href="/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
-      <url>/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-      
-        <content type="html"><![CDATA[<p>先安装nodejs</p><p>node -v#查看node版本<br>npm -v#查看npm版本<br>npm install -g cnpm –registry&#x3D;<a href="http://registry.npmmirror.com/">http://registry.npmmirror.com</a>#安装淘宝的cnpm 管理器<br>cnpm -v#查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v#查看hexo版本<br>mkdir blog#创建blog目录<br>cd blog #进入blog目录<br>sudo hexo init #生成博客 初始化博客<br>hexo s#启动本地博客服务<br><a href="http://localhost:4000/">http://localhost:4000/</a>#本地访问地址<br>hexo n “我的第一篇文章” #创建新的文章<br>#返回blog目录<br>hexo clean #清理<br>hexo g #生成<br>#Github创建一个新的仓库 YourGithubName.github.io<br>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件<br>-—<br>#配置_config.yml </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line"> type: git</span><br><span class="line">  repo: https://github.com/bigbelly-drunkard/bigbelly-drunkard.github.io.git</span><br><span class="line"> branch: master</span><br></pre></td></tr></table></figure><p>hexo d#部署到Github仓库里</p><p>走到这一步报错：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Error: Spawn failed</span><br><span class="line">  at ChildProcess.&lt;anonymous&gt; (/Users/lin/blog/node_modules/.store/hexo-util@2.7.0/node_modules/hexo-util/lib/spawn.js:51:21)</span><br><span class="line">  at ChildProcess.emit (node:events:518:28)</span><br><span class="line">  at ChildProcess._handle.onexit (node:internal/child_process:294:12)</span><br></pre></td></tr></table></figure><p>将repo换成gitee，发现没有报错，初步鉴定为网络问题，忧郁gitee白嫖域名需要备案，太麻烦了，还是用github把。</p><p>试了好久终于找到解决方法，将https链接改为ssh连接，参考：<a href="https://github.com/hexojs/hexo/issues/2778">https://github.com/hexojs/hexo/issues/2778</a></p><p><img src="/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/02/23/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/picture1.png" alt="picture1"></p><p>配置_config.yml ，将repo改为ssh链接</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line"> repo: git@github.com:bigbelly-drunkard/bigbelly-drunkard.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><p>本地生成ssh公钥</p><p>ssh-keygen -t rsa -b 4096 -C “你的github邮箱”</p><p>一路点确定</p><p>生成的公钥默认存在&#x2F;var&#x2F;root&#x2F;.ssh&#x2F;id_rsa下，将id_rsa.pub的内容拷贝的github上，点击Deploy keys &gt;&gt; Add deploy key：<img src="/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/02/23/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/picture2.png" alt="picture2"></p><p>Hero d 部署博客，成功</p><p><a href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #访问这个地址可以查看博客</p><p>#修改hexo根目录下的 _config.yml 文件 ： theme: yilia</p><p>hexo c#清理一下<br>hexo g#生成<br>hexo d#部署到远程Github仓库<br><a href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #查看博客</p><p>hexo无法显示图片解决方法：</p><p><a href="https://blog.csdn.net/weixin_44999716/article/details/112401495">https://blog.csdn.net/weixin_44999716/article/details/112401495</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> hexo </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> hexo </tag>
-            
-            <tag> 个人博客 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>redis知识点</title>
       <link href="/2024/03/05/redis%E7%AC%94%E8%AF%95%E9%A2%98/"/>
       <url>/2024/03/05/redis%E7%AC%94%E8%AF%95%E9%A2%98/</url>
@@ -148,6 +121,33 @@
         <tags>
             
             <tag> 以太坊 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用hexo搭建个人博客</title>
+      <link href="/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
+      <url>/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+      
+        <content type="html"><![CDATA[<p>先安装nodejs</p><p>node -v#查看node版本<br>npm -v#查看npm版本<br>npm install -g cnpm –registry&#x3D;<a href="http://registry.npmmirror.com/">http://registry.npmmirror.com</a>#安装淘宝的cnpm 管理器<br>cnpm -v#查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v#查看hexo版本<br>mkdir blog#创建blog目录<br>cd blog #进入blog目录<br>sudo hexo init #生成博客 初始化博客<br>hexo s#启动本地博客服务<br><a href="http://localhost:4000/">http://localhost:4000/</a>#本地访问地址<br>hexo n “我的第一篇文章” #创建新的文章<br>#返回blog目录<br>hexo clean #清理<br>hexo g #生成<br>#Github创建一个新的仓库 YourGithubName.github.io<br>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件<br>-—<br>#配置_config.yml </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line"> type: git</span><br><span class="line">  repo: https://github.com/bigbelly-drunkard/bigbelly-drunkard.github.io.git</span><br><span class="line"> branch: master</span><br></pre></td></tr></table></figure><p>hexo d#部署到Github仓库里</p><p>走到这一步报错：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Error: Spawn failed</span><br><span class="line">  at ChildProcess.&lt;anonymous&gt; (/Users/lin/blog/node_modules/.store/hexo-util@2.7.0/node_modules/hexo-util/lib/spawn.js:51:21)</span><br><span class="line">  at ChildProcess.emit (node:events:518:28)</span><br><span class="line">  at ChildProcess._handle.onexit (node:internal/child_process:294:12)</span><br></pre></td></tr></table></figure><p>将repo换成gitee，发现没有报错，初步鉴定为网络问题，忧郁gitee白嫖域名需要备案，太麻烦了，还是用github把。</p><p>试了好久终于找到解决方法，将https链接改为ssh连接，参考：<a href="https://github.com/hexojs/hexo/issues/2778">https://github.com/hexojs/hexo/issues/2778</a></p><p><img src="/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/02/23/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/picture1.png" alt="picture1"></p><p>配置_config.yml ，将repo改为ssh链接</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line"> repo: git@github.com:bigbelly-drunkard/bigbelly-drunkard.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><p>本地生成ssh公钥</p><p>ssh-keygen -t rsa -b 4096 -C “你的github邮箱”</p><p>一路点确定</p><p>生成的公钥默认存在&#x2F;var&#x2F;root&#x2F;.ssh&#x2F;id_rsa下，将id_rsa.pub的内容拷贝的github上，点击Deploy keys &gt;&gt; Add deploy key：<img src="/2024/03/05/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/02/23/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/picture2.png" alt="picture2"></p><p>Hero d 部署博客，成功</p><p><a href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #访问这个地址可以查看博客</p><p>#修改hexo根目录下的 _config.yml 文件 ： theme: yilia</p><p>hexo c#清理一下<br>hexo g#生成<br>hexo d#部署到远程Github仓库<br><a href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #查看博客</p><p>hexo无法显示图片解决方法：</p><p><a href="https://blog.csdn.net/weixin_44999716/article/details/112401495">https://blog.csdn.net/weixin_44999716/article/details/112401495</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> 个人博客 </tag>
             
         </tags>
       
