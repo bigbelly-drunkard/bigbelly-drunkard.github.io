@@ -6,15 +6,23 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>Access-control-Allow-Origin响应头为什么会生效 | Hexo</title>
+  <title>hexo如何实现多台机器同步 | Hexo</title>
   <meta name="author" content="John Doe">
   
-  <meta name="description" content="Access-Control-Allow-Origin 是一个HTTP响应头，用于指示允许访问资源的域（origin）。当服务器在HTTP响应中包含了 Access-Control-Allow-Origin 头部，并设置了合适的值时，浏览器将会根据这个设置来确定是否允许前端页面对该资源进行跨域访问。">
+  <meta name="description" content="思路当我们用hexo d部署博客到git后，实际上是将md文件解析后的html发送到git仓库中，目录如下：
+
+因此无法通过该仓库同步hexo环境
+可以另起一个分支，将hexo环境提交到git分支上，或者另外建一个仓库， whatever。
+此处新建一个分支xxx，在github上将默认分支设置为xxx，将hexo环境同步到分支上：
+通过如下命令：
+123git add .git commit &amp;quot;back up(随便写)&amp;quot;git push
+
+同步成功后的git仓库："> 
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Access-control-Allow-Origin响应头为什么会生效"/>
+  <meta property="og:title" content="hexo如何实现多台机器同步"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -114,7 +122,7 @@
 
 	
 		<div class="page-header">
-			<h1> Access-control-Allow-Origin响应头为什么会生效</h1>
+			<h1> hexo如何实现多台机器同步</h1>
 		</div>
 	
 
@@ -131,16 +139,40 @@
 	
     <div id="toc">
         <strong class="sidebar-title">目录</strong>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-text">思路</span></a></li></ol>
     </div>
 
 	<div class="mypage">		
 	  		
 
-	  <p><code>Access-Control-Allow-Origin</code> 是一个HTTP响应头，用于指示允许访问资源的域（origin）。当服务器在HTTP响应中包含了 <code>Access-Control-Allow-Origin</code> 头部，并设置了合适的值时，浏览器将会根据这个设置来确定是否允许前端页面对该资源进行跨域访问。</p>
-<p>具体而言，如果服务器设置了 <code>Access-Control-Allow-Origin: https://www.example.com</code>，那么仅来自 <a target="_blank" rel="noopener" href="https://www.example.com/">https://www.example.com</a> 的请求才会被允许访问资源。如果请求来自其他域，浏览器会阻止对该资源的访问，从而实现了跨域访问的控制。</p>
-<p>这种限制是由浏览器实施的，因为浏览器遵循同源策略（Same-origin policy），发送post请求前会先发一个options请求，浏览器会先检查并遵循服务器返回的 <code>Access-Control-Allow-Origin</code> 头部的设定，从而确保跨域请求的安全性。</p>
-<p>总之，<code>Access-Control-Allow-Origin</code> 头部生效是因为浏览器会根据这个设置来决定是否允许特定域的前端页面对资源进行跨域访问，从而保障了相应的安全策略得以执行。</p>
+	  <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>当我们用hexo d部署博客到git后，实际上是将md文件解析后的html发送到git仓库中，目录如下：</p>
+<p><img src="/2024/03/05/hexo%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%8F%B0%E6%9C%BA%E5%99%A8%E5%90%8C%E6%AD%A5/p1.png" alt="p1"></p>
+<p>因此无法通过该仓库同步hexo环境</p>
+<p>可以另起一个分支，将hexo环境提交到git分支上，或者另外建一个仓库， whatever。</p>
+<p>此处新建一个分支xxx，在github上将默认分支设置为xxx，将hexo环境同步到分支上：</p>
+<p>通过如下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit &quot;back up(随便写)&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p>同步成功后的git仓库：</p>
+<p><img src="/2024/03/05/hexo%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%8F%B0%E6%9C%BA%E5%99%A8%E5%90%8C%E6%AD%A5/p2.png" alt="p2"></p>
+<p>另一台同步环境的机器：</p>
+<p>首先要安装git，nodejs</p>
+<p>nodejs安装好cnpm</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm –registry=http://registry.npmmirror.com</span><br></pre></td></tr></table></figure>
+
+<p>从git远程仓库拉取hexo博客环境</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone xxx(你的仓库xxx分支地址)</span><br><span class="line">cnpm install</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+
+
+<p>注：</p>
+<p>如果使用github，https协议可能无法连接，可以配置ssh</p>
+<p>windows环境下</p>
+<p>运行git bash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ssh-keygen -t rsa -C &quot;你的github账号邮箱&quot; #生成ssh私钥公钥，一路确定</span><br></pre></td></tr></table></figure>
+
+<p>将&#x2F;.ssh目录下的id_rsa.pub为公钥，添加到github上</p>
+<p>使用ssh的链接拉取、同步即可</p>
 
 	  <div class="article-footer-copyright">
 
@@ -158,13 +190,12 @@
 
     
     
-    <a href="/2024/03/05/hexo如何实现多台机器同步/" type="button" class="btn btn-default"><i
-                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-    <a href="/2024/03/05/jwttoken/" type="button" class="btn btn-default ">Next<i
+    <a href="/2024/03/05/跨域/" type="button" class="btn btn-default ">Next<i
                 class="fa fa-arrow-circle-o-right"></i></a>
     
 
@@ -204,17 +235,6 @@
 
 	<!-- categories -->
     
-	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
-    <ul id="categorys" class="tag_box list-unstyled collapse in">
-          
-  <li>
-    <li><a href="/categories/网络安全/">网络安全<span>4</span></a></li>
-  </li>
-
-    </ul>
-	</div>
-	
 
 	<!-- tags -->
 	
@@ -222,7 +242,7 @@
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/跨域/">跨域<span>1</span></a></li>
+  <li><a href="/tags/hexo/">hexo<span>2</span></a></li>
     </ul>
 	</div>
 		
