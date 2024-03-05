@@ -137,45 +137,6 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/03/05/csrf/" >什么是csrf？</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-03-05  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h3 id="CSRF-攻击概述"><a href="#CSRF-攻击概述" class="headerlink" title="CSRF 攻击概述"></a>CSRF 攻击概述</h3><p>CSRF 攻击利用了用户已经认证的身份，在用户不知情的情况下，执行非预期的操作。例如，如果用户登录了银行网站，并且银行网站没有妥善防护 CSRF 攻击，攻击者可以诱导用户（通过点击一个链接或图片等）向银行网站发送恶意请求，如转账请求。</p>
-<h3 id="RESTful-API-和-CSRF"><a href="#RESTful-API-和-CSRF" class="headerlink" title="RESTful API 和 CSRF"></a>RESTful API 和 CSRF</h3><p>RESTful API 通常使用无状态认证机制，如 JWT（JSON Web Tokens）或 OAuth，而不是依赖于传统的基于会话的认证机制（这些机制依赖于浏览器的 Cookie）。这种无状态的认证方式意味着每个请求都必须包含所有必要的认证信息，而不是依赖于浏览器自动发送的 Cookie。</p>
-<ol>
-<li><strong>无状态认证</strong>：使用 JWT 或 OAuth 之类的令牌进行认证的 RESTful API，对 CSRF 攻击具有天然的防御性，因为攻击者无法获取并在恶意请求中使用这些令牌。这与传统的基于 Cookie 的会话认证不同，后者可能自动随请求发送，从而容易受到 CSRF 攻击。</li>
-<li><strong>使用 HTTP 方法</strong>：RESTful API 遵循使用不同 HTTP 方法（如 GET、POST、PUT、DELETE）的最佳实践，其中敏感操作（如更改或删除数据）应该使用 POST、PUT 或 DELETE 方法。由于 CSRF 攻击通常利用 GET 请求或某些情况下的 POST 请求，通过正确使用 HTTP 方法可以降低风险。</li>
-</ol>
-<h3 id="不是完全免疫"><a href="#不是完全免疫" class="headerlink" title="不是完全免疫"></a>不是完全免疫</h3><p>尽管上述因素可以减少 RESTful API 受到 CSRF 攻击的风险，但并不意味着它们完全免疫于 CSRF。例如，如果 RESTful API 错误地允许使用 GET 请求来执行有副作用的操作，那么它们仍然可能受到 CSRF 攻击的威胁。</p>
-<h3 id="防御措施"><a href="#防御措施" class="headerlink" title="防御措施"></a>防御措施</h3><ul>
-<li><strong>令牌基础认证</strong>：确保所有敏感操作都需要一个令牌，该令牌不会自动由浏览器发送（如 JWT）。</li>
-<li><strong>检查请求的来源</strong>：通过检查请求头（如 <code>Origin</code> 和 <code>Referer</code>）来验证请求是否来自预期的来源。</li>
-<li><strong>使用 CSRF 令牌</strong>：对于需要基于 Cookie 的会话认证的场景，可以在请求中加入 CSRF 令牌，确保请求是经过用户明确意图发起的。</li>
-</ul>
-<p>总结，RESTful API 的某些特性和使用的认证机制可能减少了 CSRF 攻击的风险，但开发者仍需采取适当的安全措施来确保其服务的安全。</p>
-	
-	</div>
-  <a type="button" href="/2024/03/05/csrf/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
 			<a href="/2024/03/05/httponly原理/" >httponly原理？</a>
 		</h3>
 		</div>
@@ -222,7 +183,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/03/05/redis笔试题/" >redis知识点</a>
+			<a href="/2024/03/05/csrf/" >什么是csrf？</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -236,35 +197,22 @@
   <div class="row">
 	
 	
-		<p>Redis是一个广泛使用的高性能键值数据库，它支持多种数据结构如字符串、哈希、列表、集合、有序集合等。在笔试或面试中，关于Redis的问题可能会覆盖基本概念、数据结构、操作命令、内部机制、持久化、安全性、性能优化等多个方面。下面列举一些可能遇到的Redis笔试题目：</p>
-<h3 id="1-Redis基本概念与数据结构"><a href="#1-Redis基本概念与数据结构" class="headerlink" title="1. Redis基本概念与数据结构"></a>1. <strong>Redis基本概念与数据结构</strong></h3><ol>
-<li>什么是Redis？它的主要特点是什么？</li>
-<li>描述Redis支持的数据类型及其用途。</li>
-<li>Redis如何实现持久化？区别<code>RDB</code>和<code>AOF</code>持久化方式。</li>
-<li>Redis的过期键是如何处理的？</li>
+		<h3 id="CSRF-攻击概述"><a href="#CSRF-攻击概述" class="headerlink" title="CSRF 攻击概述"></a>CSRF 攻击概述</h3><p>CSRF 攻击利用了用户已经认证的身份，在用户不知情的情况下，执行非预期的操作。例如，如果用户登录了银行网站，并且银行网站没有妥善防护 CSRF 攻击，攻击者可以诱导用户（通过点击一个链接或图片等）向银行网站发送恶意请求，如转账请求。</p>
+<h3 id="RESTful-API-和-CSRF"><a href="#RESTful-API-和-CSRF" class="headerlink" title="RESTful API 和 CSRF"></a>RESTful API 和 CSRF</h3><p>RESTful API 通常使用无状态认证机制，如 JWT（JSON Web Tokens）或 OAuth，而不是依赖于传统的基于会话的认证机制（这些机制依赖于浏览器的 Cookie）。这种无状态的认证方式意味着每个请求都必须包含所有必要的认证信息，而不是依赖于浏览器自动发送的 Cookie。</p>
+<ol>
+<li><strong>无状态认证</strong>：使用 JWT 或 OAuth 之类的令牌进行认证的 RESTful API，对 CSRF 攻击具有天然的防御性，因为攻击者无法获取并在恶意请求中使用这些令牌。这与传统的基于 Cookie 的会话认证不同，后者可能自动随请求发送，从而容易受到 CSRF 攻击。</li>
+<li><strong>使用 HTTP 方法</strong>：RESTful API 遵循使用不同 HTTP 方法（如 GET、POST、PUT、DELETE）的最佳实践，其中敏感操作（如更改或删除数据）应该使用 POST、PUT 或 DELETE 方法。由于 CSRF 攻击通常利用 GET 请求或某些情况下的 POST 请求，通过正确使用 HTTP 方法可以降低风险。</li>
 </ol>
-<h3 id="2-操作与命令"><a href="#2-操作与命令" class="headerlink" title="2. 操作与命令"></a>2. <strong>操作与命令</strong></h3><ol>
-<li>如何在Redis中设置键的过期时间？举例说明。</li>
-<li>解释<code>LPUSH</code>和<code>RPUSH</code>命令的区别。</li>
-<li><code>SETNX</code>命令是做什么的？它如何用于实现分布式锁？</li>
-<li>解释<code>ZADD</code>和<code>ZRANK</code>命令的作用。</li>
-</ol>
-<h3 id="3-内部机制与性能"><a href="#3-内部机制与性能" class="headerlink" title="3. 内部机制与性能"></a>3. <strong>内部机制与性能</strong></h3><ol>
-<li>Redis是单线程模型还是多线程模型？解释它如何处理并发。</li>
-<li>Redis的发布订阅模式是什么？它的应用场景有哪些？</li>
-<li>Redis事务是如何工作的？<code>MULTI</code>、<code>EXEC</code>、<code>WATCH</code>命令是做什么的？</li>
-<li>Redis如何实现高可用性？简述<code>Redis Sentinel</code>和<code>Redis Cluster</code>的区别。</li>
-</ol>
-<h3 id="4-持久化、安全性与优化"><a href="#4-持久化、安全性与优化" class="headerlink" title="4. 持久化、安全性与优化"></a>4. <strong>持久化、安全性与优化</strong></h3><ol>
-<li>描述Redis的<code>RDB</code>持久化过程和触发条件。</li>
-<li>如何优化Redis的内存使用？</li>
-<li>Redis安全性问题及其解决方案有哪些？</li>
-<li>Redis的主从复制是如何工作的？有哪些同步机制？</li>
-</ol>
-<h3 id="5-实际应用与案例分析"><a href="#5-实际应用与案例分析" class="headerlink" title="5. 实际应用与案例分析"></a>5. <strong>实际应用与案例分析</strong></h3>
+<h3 id="不是完全免疫"><a href="#不是完全免疫" class="headerlink" title="不是完全免疫"></a>不是完全免疫</h3><p>尽管上述因素可以减少 RESTful API 受到 CSRF 攻击的风险，但并不意味着它们完全免疫于 CSRF。例如，如果 RESTful API 错误地允许使用 GET 请求来执行有副作用的操作，那么它们仍然可能受到 CSRF 攻击的威胁。</p>
+<h3 id="防御措施"><a href="#防御措施" class="headerlink" title="防御措施"></a>防御措施</h3><ul>
+<li><strong>令牌基础认证</strong>：确保所有敏感操作都需要一个令牌，该令牌不会自动由浏览器发送（如 JWT）。</li>
+<li><strong>检查请求的来源</strong>：通过检查请求头（如 <code>Origin</code> 和 <code>Referer</code>）来验证请求是否来自预期的来源。</li>
+<li><strong>使用 CSRF 令牌</strong>：对于需要基于 Cookie 的会话认证的场景，可以在请求中加入 CSRF 令牌，确保请求是经过用户明确意图发起的。</li>
+</ul>
+<p>总结，RESTful API 的某些特性和使用的认证机制可能减少了 CSRF 攻击的风险，但开发者仍需采取适当的安全措施来确保其服务的安全。</p>
 	
 	</div>
-  <a type="button" href="/2024/03/05/redis笔试题/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2024/03/05/csrf/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -346,7 +294,7 @@
 	
 	
 		<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>当我们用hexo d部署博客到git后，实际上是将md文件解析后的html发送到git仓库中，目录如下：</p>
-<p>hexo如何实现多台机器同步<img src="/2024/03/05/hexo%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%8F%B0%E6%9C%BA%E5%99%A8%E5%90%8C%E6%AD%A5/p1.png" alt="p1"></p>
+<p>hexo如何实现多台机器同步<img src="/2024/03/05/hexo%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%8F%B0%E6%9C%BA%E5%99%A8%E5%90%8C%E6%AD%A5/p1.PNG" alt="p1"></p>
 <p>因此无法通过该仓库同步hexo环境</p>
 <p>可以另起一个分支，将hexo环境提交到git分支上，或者另外建一个仓库， whatever。</p>
 <p>此处新建一个分支xxx，在github上将默认分支设置为xxx，将hexo环境同步到分支上：</p>
@@ -354,10 +302,62 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit &quot;back up(随便写)&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
 
 <p>同步成功后的git仓库：</p>
-<p><img src="/2024/03/05/hexo%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%8F%B0%E6%9C%BA%E5%99%A8%E5%90%8C%E6%AD%A5/p2.png" alt="p2"></p>
+<p><img src="/2024/03/05/hexo%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%8F%B0%E6%9C%BA%E5%99%A8%E5%90%8C%E6%AD%A5/p2.PNG" alt="p2"></p>
 	
 	</div>
   <a type="button" href="/2024/03/05/hexo如何实现多台机器同步/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/03/05/redis笔试题/" >redis知识点</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-03-05  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Redis是一个广泛使用的高性能键值数据库，它支持多种数据结构如字符串、哈希、列表、集合、有序集合等。在笔试或面试中，关于Redis的问题可能会覆盖基本概念、数据结构、操作命令、内部机制、持久化、安全性、性能优化等多个方面。下面列举一些可能遇到的Redis笔试题目：</p>
+<h3 id="1-Redis基本概念与数据结构"><a href="#1-Redis基本概念与数据结构" class="headerlink" title="1. Redis基本概念与数据结构"></a>1. <strong>Redis基本概念与数据结构</strong></h3><ol>
+<li>什么是Redis？它的主要特点是什么？</li>
+<li>描述Redis支持的数据类型及其用途。</li>
+<li>Redis如何实现持久化？区别<code>RDB</code>和<code>AOF</code>持久化方式。</li>
+<li>Redis的过期键是如何处理的？</li>
+</ol>
+<h3 id="2-操作与命令"><a href="#2-操作与命令" class="headerlink" title="2. 操作与命令"></a>2. <strong>操作与命令</strong></h3><ol>
+<li>如何在Redis中设置键的过期时间？举例说明。</li>
+<li>解释<code>LPUSH</code>和<code>RPUSH</code>命令的区别。</li>
+<li><code>SETNX</code>命令是做什么的？它如何用于实现分布式锁？</li>
+<li>解释<code>ZADD</code>和<code>ZRANK</code>命令的作用。</li>
+</ol>
+<h3 id="3-内部机制与性能"><a href="#3-内部机制与性能" class="headerlink" title="3. 内部机制与性能"></a>3. <strong>内部机制与性能</strong></h3><ol>
+<li>Redis是单线程模型还是多线程模型？解释它如何处理并发。</li>
+<li>Redis的发布订阅模式是什么？它的应用场景有哪些？</li>
+<li>Redis事务是如何工作的？<code>MULTI</code>、<code>EXEC</code>、<code>WATCH</code>命令是做什么的？</li>
+<li>Redis如何实现高可用性？简述<code>Redis Sentinel</code>和<code>Redis Cluster</code>的区别。</li>
+</ol>
+<h3 id="4-持久化、安全性与优化"><a href="#4-持久化、安全性与优化" class="headerlink" title="4. 持久化、安全性与优化"></a>4. <strong>持久化、安全性与优化</strong></h3><ol>
+<li>描述Redis的<code>RDB</code>持久化过程和触发条件。</li>
+<li>如何优化Redis的内存使用？</li>
+<li>Redis安全性问题及其解决方案有哪些？</li>
+<li>Redis的主从复制是如何工作的？有哪些同步机制？</li>
+</ol>
+<h3 id="5-实际应用与案例分析"><a href="#5-实际应用与案例分析" class="headerlink" title="5. 实际应用与案例分析"></a>5. <strong>实际应用与案例分析</strong></h3>
+	
+	</div>
+  <a type="button" href="/2024/03/05/redis笔试题/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -404,6 +404,37 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/03/05/跨域/" >Access-control-Allow-Origin响应头为什么会生效</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-03-05  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p><code>Access-Control-Allow-Origin</code> 是一个HTTP响应头，用于指示允许访问资源的域（origin）。当服务器在HTTP响应中包含了 <code>Access-Control-Allow-Origin</code> 头部，并设置了合适的值时，浏览器将会根据这个设置来确定是否允许前端页面对该资源进行跨域访问。</p>
+<p>具体而言，如果服务器设置了 <code>Access-Control-Allow-Origin: https://www.example.com</code>，那么仅来自 <a target="_blank" rel="noopener" href="https://www.example.com/">https://www.example.com</a> 的请求才会被允许访问资源。如果请求来自其他域，浏览器会阻止对该资源的访问，从而实现了跨域访问的控制。</p>
+<p>这种限制是由浏览器实施的，因为浏览器遵循同源策略（Same-origin policy），发送post请求前会先发一个options请求，浏览器会先检查并遵循服务器返回的 <code>Access-Control-Allow-Origin</code> 头部的设定，从而确保跨域请求的安全性。</p>
+<p>总之，<code>Access-Control-Allow-Origin</code> 头部生效是因为浏览器会根据这个设置来决定是否允许特定域的前端页面对资源进行跨域访问，从而保障了相应的安全策略得以执行。</p>
+
+	
+	</div>
+  <a type="button" href="/2024/03/05/跨域/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/03/05/使用hexo搭建个人博客/" >使用hexo搭建个人博客</a>
 		</h3>
 		</div>
@@ -433,37 +464,6 @@
 	
 	</div>
   <a type="button" href="/2024/03/05/使用hexo搭建个人博客/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/03/05/跨域/" >Access-control-Allow-Origin响应头为什么会生效</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-03-05  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p><code>Access-Control-Allow-Origin</code> 是一个HTTP响应头，用于指示允许访问资源的域（origin）。当服务器在HTTP响应中包含了 <code>Access-Control-Allow-Origin</code> 头部，并设置了合适的值时，浏览器将会根据这个设置来确定是否允许前端页面对该资源进行跨域访问。</p>
-<p>具体而言，如果服务器设置了 <code>Access-Control-Allow-Origin: https://www.example.com</code>，那么仅来自 <a target="_blank" rel="noopener" href="https://www.example.com/">https://www.example.com</a> 的请求才会被允许访问资源。如果请求来自其他域，浏览器会阻止对该资源的访问，从而实现了跨域访问的控制。</p>
-<p>这种限制是由浏览器实施的，因为浏览器遵循同源策略（Same-origin policy），发送post请求前会先发一个options请求，浏览器会先检查并遵循服务器返回的 <code>Access-Control-Allow-Origin</code> 头部的设定，从而确保跨域请求的安全性。</p>
-<p>总之，<code>Access-Control-Allow-Origin</code> 头部生效是因为浏览器会根据这个设置来决定是否允许特定域的前端页面对资源进行跨域访问，从而保障了相应的安全策略得以执行。</p>
-
-	
-	</div>
-  <a type="button" href="/2024/03/05/跨域/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -521,23 +521,23 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/以太坊/">以太坊<span>1</span></a></li>
-		
-			<li><a href="/tags/个人博客/">个人博客<span>1</span></a></li>
-		
-			<li><a href="/tags/身份验证/">身份验证<span>1</span></a></li>
+			<li><a href="/tags/redis/">redis<span>1</span></a></li>
 		
 			<li><a href="/tags/httponly/">httponly<span>1</span></a></li>
 		
-			<li><a href="/tags/跨域/">跨域<span>1</span></a></li>
-		
 			<li><a href="/tags/xss/">xss<span>1</span></a></li>
+		
+			<li><a href="/tags/身份验证/">身份验证<span>1</span></a></li>
+		
+			<li><a href="/tags/跨域/">跨域<span>1</span></a></li>
 		
 			<li><a href="/tags/csrf/">csrf<span>1</span></a></li>
 		
-			<li><a href="/tags/redis/">redis<span>1</span></a></li>
+			<li><a href="/tags/个人博客/">个人博客<span>1</span></a></li>
 		
 			<li><a href="/tags/hexo/">hexo<span>2</span></a></li>
+		
+			<li><a href="/tags/以太坊/">以太坊<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -551,15 +551,11 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2024/03/05/csrf/" ><i class="fa fa-file-o"></i>什么是csrf？</a>
-      </li>
-    
-      <li>
         <a href="/2024/03/05/httponly原理/" ><i class="fa fa-file-o"></i>httponly原理？</a>
       </li>
     
       <li>
-        <a href="/2024/03/05/redis笔试题/" ><i class="fa fa-file-o"></i>redis知识点</a>
+        <a href="/2024/03/05/csrf/" ><i class="fa fa-file-o"></i>什么是csrf？</a>
       </li>
     
       <li>
@@ -568,6 +564,10 @@
     
       <li>
         <a href="/2024/03/05/hexo如何实现多台机器同步/" ><i class="fa fa-file-o"></i>hexo如何实现多台机器同步</a>
+      </li>
+    
+      <li>
+        <a href="/2024/03/05/redis笔试题/" ><i class="fa fa-file-o"></i>redis知识点</a>
       </li>
     
   </ul>
