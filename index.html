@@ -137,42 +137,6 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/03/05/hexo如何实现多台机器同步/" >hexo如何实现多台机器同步</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-03-05  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>当我们用hexo d部署博客到git后，实际上是将md文件解析后的html发送到git仓库中，目录如下：</p>
-<p>hexo如何实现多台机器同步<img src="/2024/03/05/hexo%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%8F%B0%E6%9C%BA%E5%99%A8%E5%90%8C%E6%AD%A5/p1.png" alt="p1"></p>
-<p>因此无法通过该仓库同步hexo环境</p>
-<p>可以另起一个分支，将hexo环境提交到git分支上，或者另外建一个仓库， whatever。</p>
-<p>此处新建一个分支xxx，在github上将默认分支设置为xxx，将hexo环境同步到分支上：</p>
-<p>通过如下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit &quot;back up(随便写)&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-
-<p>同步成功后的git仓库：</p>
-<p><img src="/2024/03/05/hexo%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%8F%B0%E6%9C%BA%E5%99%A8%E5%90%8C%E6%AD%A5/p2.png" alt="p2"></p>
-	
-	</div>
-  <a type="button" href="/2024/03/05/hexo如何实现多台机器同步/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
 			<a href="/2024/03/05/csrf/" >什么是csrf？</a>
 		</h3>
 		</div>
@@ -212,7 +176,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/03/05/jwttoken/" >什么是jwttoken</a>
+			<a href="/2024/03/05/redis笔试题/" >redis知识点</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -226,40 +190,35 @@
   <div class="row">
 	
 	
-		<p>JWT（JSON Web Token）是一种开放标准（RFC 7519），用于在两方之间安全地传递信息。它通常用于身份验证和信息交换，特别是在Web应用程序中。JWT的核心优点是它的紧凑性和自包含性，让它成为Web环境中理想的令牌格式。</p>
-<p>JWT通常由三部分组成，用点（<code>.</code>）分隔：</p>
-<ol>
-<li><p><strong>Header（头部）</strong>：它是一个JSON对象，描述了令牌的类型（通常是JWT）以及使用的签名或加密算法（如HMAC、SHA256或RSA）。</p>
-<p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;alg&quot;: &quot;HS256&quot;,</span><br><span class="line">  &quot;typ&quot;: &quot;JWT&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Payload（有效载荷）</strong>：它也是一个JSON对象，包含了实际传输的声明（Claims）。声明是关于实体（通常是用户）和其他数据的语句。有三种类型的声明：注册声明（如iss、exp、sub）、公共声明和私有声明。</p>
-<p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;John Doe&quot;,</span><br><span class="line">  &quot;admin&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Signature（签名）</strong>：为了创建签名部分，您必须使用编码后的header和payload以及一个秘密（只有发送者和接收者知道的秘密），使用header中指定的算法进行签名。</p>
-<p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plaintext复制代码HMACSHA256(</span><br><span class="line">  base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload),</span><br><span class="line">  secret)</span><br></pre></td></tr></table></figure></li>
+		<p>Redis是一个广泛使用的高性能键值数据库，它支持多种数据结构如字符串、哈希、列表、集合、有序集合等。在笔试或面试中，关于Redis的问题可能会覆盖基本概念、数据结构、操作命令、内部机制、持久化、安全性、性能优化等多个方面。下面列举一些可能遇到的Redis笔试题目：</p>
+<h3 id="1-Redis基本概念与数据结构"><a href="#1-Redis基本概念与数据结构" class="headerlink" title="1. Redis基本概念与数据结构"></a>1. <strong>Redis基本概念与数据结构</strong></h3><ol>
+<li>什么是Redis？它的主要特点是什么？</li>
+<li>描述Redis支持的数据类型及其用途。</li>
+<li>Redis如何实现持久化？区别<code>RDB</code>和<code>AOF</code>持久化方式。</li>
+<li>Redis的过期键是如何处理的？</li>
 </ol>
-<p>最终，一个JWT可能看起来像这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制代码eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dPxL6YlOxIlalLJ4HOdl7QzyiqM0gB1qjUmUISZaD10</span><br></pre></td></tr></table></figure>
-
-<p>这个字符串可以在客户端和服务器之间安全地传递，用于验证用户的身份或传递其他信息。服务器可以验证令牌的签名以确认其未被篡改，并从中提取有用的信息。</p>
-<h2 id="jwttoken有哪些使用场景？"><a href="#jwttoken有哪些使用场景？" class="headerlink" title="jwttoken有哪些使用场景？"></a>jwttoken有哪些使用场景？</h2><ol>
-<li><strong>用户认证</strong>：这可能是 JWT 最广泛的应用场景。服务器在用户登录后会生成一个 JWT，并将其发送回客户端，之后客户端会在随后的请求中带上这个 JWT，服务器通过验证 JWT 来确认用户身份。</li>
-<li><strong>跨域身份验证（CORS）</strong>：由于 JWT 是自包含的，因此，一个服务可以轻松识别请求是否已被授权，即便是跨域请求。</li>
-<li><strong>无状态会话</strong>：JWT 由于其自包含性，可以实现无状态的会话机制。服务器不需要在数据库中保持会话状态，有益于减轻服务器压力并提高伸缩性。</li>
-<li><strong>移动设备认证</strong>：JWT 非常适合在移动环境中使用，可以方便地在移动客户端和服务器之间交换认证信息。</li>
-<li><strong>单点登录（SSO）</strong>：JWT 可以很方便地用于单点登录（SSO）场景，即用户在不同的系统和服务中仅需登录一次。</li>
-<li><strong>微服务之间的授权</strong>：在微服务架构中，不同的服务之间可能需要交换受保护的资源。JWT 可以在这些服务之间提供一个高效和安全的认证和授权机制。</li>
-<li><strong>IoT（物联网）设备鉴权</strong>：由于 JWT 的轻量级和灵活性，很适合在物联网环境下对设备进行鉴权。</li>
-<li><strong>访问令牌和刷新令牌</strong>：在基于令牌的认证中，经常用 JWT 生成访问令牌（较短的有效期）和刷新令牌（较长的有效期），在保障系统安全的同时提高用户体验。</li>
+<h3 id="2-操作与命令"><a href="#2-操作与命令" class="headerlink" title="2. 操作与命令"></a>2. <strong>操作与命令</strong></h3><ol>
+<li>如何在Redis中设置键的过期时间？举例说明。</li>
+<li>解释<code>LPUSH</code>和<code>RPUSH</code>命令的区别。</li>
+<li><code>SETNX</code>命令是做什么的？它如何用于实现分布式锁？</li>
+<li>解释<code>ZADD</code>和<code>ZRANK</code>命令的作用。</li>
 </ol>
-<p>通过这些使用场景，我们可以看到 JWT 作为一种跨平台的授权解决方案，在当今的众多应用和系统之间扮演着关键的角色。它凭借着可伸缩性、简洁和灵活性而广受欢迎。不过，跟任何技术一样，使用 JWT 时也要妥善处理好和安全性相关的考虑，例如：敏感信息的加密处理、令牌的定期轮换、以及恰当地设置过期时间等。这有助于降低潜在的风险并确保系统的安全性。</p>
-<p>在继续深入 JWT 的使用之前，有几点安全最佳实践需要注意：</p>
+<h3 id="3-内部机制与性能"><a href="#3-内部机制与性能" class="headerlink" title="3. 内部机制与性能"></a>3. <strong>内部机制与性能</strong></h3><ol>
+<li>Redis是单线程模型还是多线程模型？解释它如何处理并发。</li>
+<li>Redis的发布订阅模式是什么？它的应用场景有哪些？</li>
+<li>Redis事务是如何工作的？<code>MULTI</code>、<code>EXEC</code>、<code>WATCH</code>命令是做什么的？</li>
+<li>Redis如何实现高可用性？简述<code>Redis Sentinel</code>和<code>Redis Cluster</code>的区别。</li>
+</ol>
+<h3 id="4-持久化、安全性与优化"><a href="#4-持久化、安全性与优化" class="headerlink" title="4. 持久化、安全性与优化"></a>4. <strong>持久化、安全性与优化</strong></h3><ol>
+<li>描述Redis的<code>RDB</code>持久化过程和触发条件。</li>
+<li>如何优化Redis的内存使用？</li>
+<li>Redis安全性问题及其解决方案有哪些？</li>
+<li>Redis的主从复制是如何工作的？有哪些同步机制？</li>
+</ol>
+<h3 id="5-实际应用与案例分析"><a href="#5-实际应用与案例分析" class="headerlink" title="5. 实际应用与案例分析"></a>5. <strong>实际应用与案例分析</strong></h3>
 	
 	</div>
-  <a type="button" href="/2024/03/05/jwttoken/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2024/03/05/redis笔试题/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -269,7 +228,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/03/05/httponly原理/" >httponly原理？</a>
+			<a href="/2024/03/05/hexo如何实现多台机器同步/" >hexo如何实现多台机器同步</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -283,29 +242,50 @@
   <div class="row">
 	
 	
-		<h2 id="设置了httponly后无法被javascript调用？那用户怎么发xhr请求？"><a href="#设置了httponly后无法被javascript调用？那用户怎么发xhr请求？" class="headerlink" title="设置了httponly后无法被javascript调用？那用户怎么发xhr请求？"></a>设置了httponly后无法被javascript调用？那用户怎么发xhr请求？</h2><p>浏览器自动发送带有<code>HttpOnly</code>标志的Cookie是其内置功能的一部分，不需要开发者或用户进行特别设置。当服务器通过设置一个带有<code>HttpOnly</code>标志的Cookie响应一个HTTP请求时，这个Cookie会被浏览器存储起来。之后，每当用户的浏览器向同一域名发送请求时，浏览器会自动附加这个域名下的所有Cookie，包括那些标记为<code>HttpOnly</code>的Cookie。</p>
-<h3 id="实现自动发送HttpOnly-Cookie的步骤："><a href="#实现自动发送HttpOnly-Cookie的步骤：" class="headerlink" title="实现自动发送HttpOnly Cookie的步骤："></a>实现自动发送<code>HttpOnly</code> Cookie的步骤：</h3><ol>
-<li><p><strong>服务器设置Cookie</strong>：在服务器处理用户登录或其他需要设置Cookie的请求时，通过响应头<code>Set-Cookie</code>加上<code>HttpOnly</code>标志来设置Cookie。例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制代码Set-Cookie: sessionId=abc123; Path=/; HttpOnly</span><br></pre></td></tr></table></figure>
+		<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>当我们用hexo d部署博客到git后，实际上是将md文件解析后的html发送到git仓库中，目录如下：</p>
+<p>hexo如何实现多台机器同步<img src="/2024/03/05/hexo%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%8F%B0%E6%9C%BA%E5%99%A8%E5%90%8C%E6%AD%A5/p1.png" alt="p1"></p>
+<p>因此无法通过该仓库同步hexo环境</p>
+<p>可以另起一个分支，将hexo环境提交到git分支上，或者另外建一个仓库， whatever。</p>
+<p>此处新建一个分支xxx，在github上将默认分支设置为xxx，将hexo环境同步到分支上：</p>
+<p>通过如下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit &quot;back up(随便写)&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
 
-<p>这告诉浏览器保存这个名为<code>sessionId</code>的Cookie，并在之后的请求中自动发送给服务器，同时因为<code>HttpOnly</code>的存在，这个Cookie不能被客户端JavaScript访问。</p>
-</li>
-<li><p><strong>浏览器存储和管理Cookie</strong>：一旦浏览器接收到这个设置了<code>HttpOnly</code>标志的Cookie，它会将其存储起来，并在之后向相同域名发送的所有请求中自动包含这个Cookie。</p>
-</li>
-<li><p><strong>自动附加Cookie到请求</strong>：用户在与服务器交互时（例如，浏览网页、提交表单等），浏览器会根据需要自动将存储的Cookie附加到向该域名的请求头中，包括那些<code>HttpOnly</code>的Cookie。</p>
-</li>
-</ol>
-<h3 id="重要点："><a href="#重要点：" class="headerlink" title="重要点："></a>重要点：</h3><ul>
-<li><strong>域名和路径</strong>：浏览器只会将Cookie发送给设置它们的相同域名和路径。如果Cookie的<code>Domain</code>和<code>Path</code>属性限制了其作用范围，浏览器会遵守这些规则，只在相应的域和路径下发送Cookie。</li>
-<li><strong>安全和策略</strong>：为增强安全性，建议使用<code>Secure</code>标志（仅通过HTTPS发送Cookie）和<code>SameSite</code>标志（控制Cookie在跨站请求中的发送行为）与<code>HttpOnly</code>标志一同使用。</li>
-</ul>
-<p>通过这种方式，浏览器确保了<code>HttpOnly</code> Cookie的安全性，使其在客户端脚本中不可访问，同时保证了这些Cookie能够在用户与服务器交互时被自动使用，从而支持如会话管理和用户身份验证等功能。</p>
-<p>注：</p>
-<p>httponly能防止客户端js脚本访问和修改凭据，可以在一定程度上防御xss，例如黑客无法做到通过js将用户的cookie发送给自己，但是如果诱导用户自己执行js脚本发送请求，请求还是会发送成功。因此增加了httponly后，黑客实施xss攻击确实更加繁琐了。</p>
+<p>同步成功后的git仓库：</p>
+<p><img src="/2024/03/05/hexo%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%8F%B0%E6%9C%BA%E5%99%A8%E5%90%8C%E6%AD%A5/p2.png" alt="p2"></p>
+	
+	</div>
+  <a type="button" href="/2024/03/05/hexo如何实现多台机器同步/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/03/05/跨域/" >Access-control-Allow-Origin响应头为什么会生效</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-03-05  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p><code>Access-Control-Allow-Origin</code> 是一个HTTP响应头，用于指示允许访问资源的域（origin）。当服务器在HTTP响应中包含了 <code>Access-Control-Allow-Origin</code> 头部，并设置了合适的值时，浏览器将会根据这个设置来确定是否允许前端页面对该资源进行跨域访问。</p>
+<p>具体而言，如果服务器设置了 <code>Access-Control-Allow-Origin: https://www.example.com</code>，那么仅来自 <a target="_blank" rel="noopener" href="https://www.example.com/">https://www.example.com</a> 的请求才会被允许访问资源。如果请求来自其他域，浏览器会阻止对该资源的访问，从而实现了跨域访问的控制。</p>
+<p>这种限制是由浏览器实施的，因为浏览器遵循同源策略（Same-origin policy），发送post请求前会先发一个options请求，浏览器会先检查并遵循服务器返回的 <code>Access-Control-Allow-Origin</code> 头部的设定，从而确保跨域请求的安全性。</p>
+<p>总之，<code>Access-Control-Allow-Origin</code> 头部生效是因为浏览器会根据这个设置来决定是否允许特定域的前端页面对资源进行跨域访问，从而保障了相应的安全策略得以执行。</p>
 
 	
 	</div>
-  <a type="button" href="/2024/03/05/httponly原理/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2024/03/05/跨域/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -390,7 +370,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/03/05/跨域/" >Access-control-Allow-Origin响应头为什么会生效</a>
+			<a href="/2024/03/05/httponly原理/" >httponly原理？</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -404,14 +384,29 @@
   <div class="row">
 	
 	
-		<p><code>Access-Control-Allow-Origin</code> 是一个HTTP响应头，用于指示允许访问资源的域（origin）。当服务器在HTTP响应中包含了 <code>Access-Control-Allow-Origin</code> 头部，并设置了合适的值时，浏览器将会根据这个设置来确定是否允许前端页面对该资源进行跨域访问。</p>
-<p>具体而言，如果服务器设置了 <code>Access-Control-Allow-Origin: https://www.example.com</code>，那么仅来自 <a target="_blank" rel="noopener" href="https://www.example.com/">https://www.example.com</a> 的请求才会被允许访问资源。如果请求来自其他域，浏览器会阻止对该资源的访问，从而实现了跨域访问的控制。</p>
-<p>这种限制是由浏览器实施的，因为浏览器遵循同源策略（Same-origin policy），发送post请求前会先发一个options请求，浏览器会先检查并遵循服务器返回的 <code>Access-Control-Allow-Origin</code> 头部的设定，从而确保跨域请求的安全性。</p>
-<p>总之，<code>Access-Control-Allow-Origin</code> 头部生效是因为浏览器会根据这个设置来决定是否允许特定域的前端页面对资源进行跨域访问，从而保障了相应的安全策略得以执行。</p>
+		<h2 id="设置了httponly后无法被javascript调用？那用户怎么发xhr请求？"><a href="#设置了httponly后无法被javascript调用？那用户怎么发xhr请求？" class="headerlink" title="设置了httponly后无法被javascript调用？那用户怎么发xhr请求？"></a>设置了httponly后无法被javascript调用？那用户怎么发xhr请求？</h2><p>浏览器自动发送带有<code>HttpOnly</code>标志的Cookie是其内置功能的一部分，不需要开发者或用户进行特别设置。当服务器通过设置一个带有<code>HttpOnly</code>标志的Cookie响应一个HTTP请求时，这个Cookie会被浏览器存储起来。之后，每当用户的浏览器向同一域名发送请求时，浏览器会自动附加这个域名下的所有Cookie，包括那些标记为<code>HttpOnly</code>的Cookie。</p>
+<h3 id="实现自动发送HttpOnly-Cookie的步骤："><a href="#实现自动发送HttpOnly-Cookie的步骤：" class="headerlink" title="实现自动发送HttpOnly Cookie的步骤："></a>实现自动发送<code>HttpOnly</code> Cookie的步骤：</h3><ol>
+<li><p><strong>服务器设置Cookie</strong>：在服务器处理用户登录或其他需要设置Cookie的请求时，通过响应头<code>Set-Cookie</code>加上<code>HttpOnly</code>标志来设置Cookie。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制代码Set-Cookie: sessionId=abc123; Path=/; HttpOnly</span><br></pre></td></tr></table></figure>
+
+<p>这告诉浏览器保存这个名为<code>sessionId</code>的Cookie，并在之后的请求中自动发送给服务器，同时因为<code>HttpOnly</code>的存在，这个Cookie不能被客户端JavaScript访问。</p>
+</li>
+<li><p><strong>浏览器存储和管理Cookie</strong>：一旦浏览器接收到这个设置了<code>HttpOnly</code>标志的Cookie，它会将其存储起来，并在之后向相同域名发送的所有请求中自动包含这个Cookie。</p>
+</li>
+<li><p><strong>自动附加Cookie到请求</strong>：用户在与服务器交互时（例如，浏览网页、提交表单等），浏览器会根据需要自动将存储的Cookie附加到向该域名的请求头中，包括那些<code>HttpOnly</code>的Cookie。</p>
+</li>
+</ol>
+<h3 id="重要点："><a href="#重要点：" class="headerlink" title="重要点："></a>重要点：</h3><ul>
+<li><strong>域名和路径</strong>：浏览器只会将Cookie发送给设置它们的相同域名和路径。如果Cookie的<code>Domain</code>和<code>Path</code>属性限制了其作用范围，浏览器会遵守这些规则，只在相应的域和路径下发送Cookie。</li>
+<li><strong>安全和策略</strong>：为增强安全性，建议使用<code>Secure</code>标志（仅通过HTTPS发送Cookie）和<code>SameSite</code>标志（控制Cookie在跨站请求中的发送行为）与<code>HttpOnly</code>标志一同使用。</li>
+</ul>
+<p>通过这种方式，浏览器确保了<code>HttpOnly</code> Cookie的安全性，使其在客户端脚本中不可访问，同时保证了这些Cookie能够在用户与服务器交互时被自动使用，从而支持如会话管理和用户身份验证等功能。</p>
+<p>注：</p>
+<p>httponly能防止客户端js脚本访问和修改凭据，可以在一定程度上防御xss，例如黑客无法做到通过js将用户的cookie发送给自己，但是如果诱导用户自己执行js脚本发送请求，请求还是会发送成功。因此增加了httponly后，黑客实施xss攻击确实更加繁琐了。</p>
 
 	
 	</div>
-  <a type="button" href="/2024/03/05/跨域/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2024/03/05/httponly原理/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -421,7 +416,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/03/05/redis笔试题/" >redis知识点</a>
+			<a href="/2024/03/05/jwttoken/" >什么是jwttoken</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -435,35 +430,40 @@
   <div class="row">
 	
 	
-		<p>Redis是一个广泛使用的高性能键值数据库，它支持多种数据结构如字符串、哈希、列表、集合、有序集合等。在笔试或面试中，关于Redis的问题可能会覆盖基本概念、数据结构、操作命令、内部机制、持久化、安全性、性能优化等多个方面。下面列举一些可能遇到的Redis笔试题目：</p>
-<h3 id="1-Redis基本概念与数据结构"><a href="#1-Redis基本概念与数据结构" class="headerlink" title="1. Redis基本概念与数据结构"></a>1. <strong>Redis基本概念与数据结构</strong></h3><ol>
-<li>什么是Redis？它的主要特点是什么？</li>
-<li>描述Redis支持的数据类型及其用途。</li>
-<li>Redis如何实现持久化？区别<code>RDB</code>和<code>AOF</code>持久化方式。</li>
-<li>Redis的过期键是如何处理的？</li>
+		<p>JWT（JSON Web Token）是一种开放标准（RFC 7519），用于在两方之间安全地传递信息。它通常用于身份验证和信息交换，特别是在Web应用程序中。JWT的核心优点是它的紧凑性和自包含性，让它成为Web环境中理想的令牌格式。</p>
+<p>JWT通常由三部分组成，用点（<code>.</code>）分隔：</p>
+<ol>
+<li><p><strong>Header（头部）</strong>：它是一个JSON对象，描述了令牌的类型（通常是JWT）以及使用的签名或加密算法（如HMAC、SHA256或RSA）。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;alg&quot;: &quot;HS256&quot;,</span><br><span class="line">  &quot;typ&quot;: &quot;JWT&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Payload（有效载荷）</strong>：它也是一个JSON对象，包含了实际传输的声明（Claims）。声明是关于实体（通常是用户）和其他数据的语句。有三种类型的声明：注册声明（如iss、exp、sub）、公共声明和私有声明。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">json复制代码&#123;</span><br><span class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;John Doe&quot;,</span><br><span class="line">  &quot;admin&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Signature（签名）</strong>：为了创建签名部分，您必须使用编码后的header和payload以及一个秘密（只有发送者和接收者知道的秘密），使用header中指定的算法进行签名。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plaintext复制代码HMACSHA256(</span><br><span class="line">  base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload),</span><br><span class="line">  secret)</span><br></pre></td></tr></table></figure></li>
 </ol>
-<h3 id="2-操作与命令"><a href="#2-操作与命令" class="headerlink" title="2. 操作与命令"></a>2. <strong>操作与命令</strong></h3><ol>
-<li>如何在Redis中设置键的过期时间？举例说明。</li>
-<li>解释<code>LPUSH</code>和<code>RPUSH</code>命令的区别。</li>
-<li><code>SETNX</code>命令是做什么的？它如何用于实现分布式锁？</li>
-<li>解释<code>ZADD</code>和<code>ZRANK</code>命令的作用。</li>
+<p>最终，一个JWT可能看起来像这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制代码eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dPxL6YlOxIlalLJ4HOdl7QzyiqM0gB1qjUmUISZaD10</span><br></pre></td></tr></table></figure>
+
+<p>这个字符串可以在客户端和服务器之间安全地传递，用于验证用户的身份或传递其他信息。服务器可以验证令牌的签名以确认其未被篡改，并从中提取有用的信息。</p>
+<h2 id="jwttoken有哪些使用场景？"><a href="#jwttoken有哪些使用场景？" class="headerlink" title="jwttoken有哪些使用场景？"></a>jwttoken有哪些使用场景？</h2><ol>
+<li><strong>用户认证</strong>：这可能是 JWT 最广泛的应用场景。服务器在用户登录后会生成一个 JWT，并将其发送回客户端，之后客户端会在随后的请求中带上这个 JWT，服务器通过验证 JWT 来确认用户身份。</li>
+<li><strong>跨域身份验证（CORS）</strong>：由于 JWT 是自包含的，因此，一个服务可以轻松识别请求是否已被授权，即便是跨域请求。</li>
+<li><strong>无状态会话</strong>：JWT 由于其自包含性，可以实现无状态的会话机制。服务器不需要在数据库中保持会话状态，有益于减轻服务器压力并提高伸缩性。</li>
+<li><strong>移动设备认证</strong>：JWT 非常适合在移动环境中使用，可以方便地在移动客户端和服务器之间交换认证信息。</li>
+<li><strong>单点登录（SSO）</strong>：JWT 可以很方便地用于单点登录（SSO）场景，即用户在不同的系统和服务中仅需登录一次。</li>
+<li><strong>微服务之间的授权</strong>：在微服务架构中，不同的服务之间可能需要交换受保护的资源。JWT 可以在这些服务之间提供一个高效和安全的认证和授权机制。</li>
+<li><strong>IoT（物联网）设备鉴权</strong>：由于 JWT 的轻量级和灵活性，很适合在物联网环境下对设备进行鉴权。</li>
+<li><strong>访问令牌和刷新令牌</strong>：在基于令牌的认证中，经常用 JWT 生成访问令牌（较短的有效期）和刷新令牌（较长的有效期），在保障系统安全的同时提高用户体验。</li>
 </ol>
-<h3 id="3-内部机制与性能"><a href="#3-内部机制与性能" class="headerlink" title="3. 内部机制与性能"></a>3. <strong>内部机制与性能</strong></h3><ol>
-<li>Redis是单线程模型还是多线程模型？解释它如何处理并发。</li>
-<li>Redis的发布订阅模式是什么？它的应用场景有哪些？</li>
-<li>Redis事务是如何工作的？<code>MULTI</code>、<code>EXEC</code>、<code>WATCH</code>命令是做什么的？</li>
-<li>Redis如何实现高可用性？简述<code>Redis Sentinel</code>和<code>Redis Cluster</code>的区别。</li>
-</ol>
-<h3 id="4-持久化、安全性与优化"><a href="#4-持久化、安全性与优化" class="headerlink" title="4. 持久化、安全性与优化"></a>4. <strong>持久化、安全性与优化</strong></h3><ol>
-<li>描述Redis的<code>RDB</code>持久化过程和触发条件。</li>
-<li>如何优化Redis的内存使用？</li>
-<li>Redis安全性问题及其解决方案有哪些？</li>
-<li>Redis的主从复制是如何工作的？有哪些同步机制？</li>
-</ol>
-<h3 id="5-实际应用与案例分析"><a href="#5-实际应用与案例分析" class="headerlink" title="5. 实际应用与案例分析"></a>5. <strong>实际应用与案例分析</strong></h3>
+<p>通过这些使用场景，我们可以看到 JWT 作为一种跨平台的授权解决方案，在当今的众多应用和系统之间扮演着关键的角色。它凭借着可伸缩性、简洁和灵活性而广受欢迎。不过，跟任何技术一样，使用 JWT 时也要妥善处理好和安全性相关的考虑，例如：敏感信息的加密处理、令牌的定期轮换、以及恰当地设置过期时间等。这有助于降低潜在的风险并确保系统的安全性。</p>
+<p>在继续深入 JWT 的使用之前，有几点安全最佳实践需要注意：</p>
 	
 	</div>
-  <a type="button" href="/2024/03/05/redis笔试题/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2024/03/05/jwttoken/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -521,23 +521,23 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/个人博客/">个人博客<span>1</span></a></li>
-		
 			<li><a href="/tags/身份验证/">身份验证<span>1</span></a></li>
-		
-			<li><a href="/tags/httponly/">httponly<span>1</span></a></li>
-		
-			<li><a href="/tags/csrf/">csrf<span>1</span></a></li>
-		
-			<li><a href="/tags/跨域/">跨域<span>1</span></a></li>
-		
-			<li><a href="/tags/以太坊/">以太坊<span>1</span></a></li>
-		
-			<li><a href="/tags/redis/">redis<span>1</span></a></li>
 		
 			<li><a href="/tags/xss/">xss<span>1</span></a></li>
 		
+			<li><a href="/tags/跨域/">跨域<span>1</span></a></li>
+		
+			<li><a href="/tags/httponly/">httponly<span>1</span></a></li>
+		
+			<li><a href="/tags/以太坊/">以太坊<span>1</span></a></li>
+		
+			<li><a href="/tags/csrf/">csrf<span>1</span></a></li>
+		
+			<li><a href="/tags/redis/">redis<span>1</span></a></li>
+		
 			<li><a href="/tags/hexo/">hexo<span>2</span></a></li>
+		
+			<li><a href="/tags/个人博客/">个人博客<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -551,19 +551,19 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2024/03/05/hexo如何实现多台机器同步/" ><i class="fa fa-file-o"></i>hexo如何实现多台机器同步</a>
-      </li>
-    
-      <li>
         <a href="/2024/03/05/csrf/" ><i class="fa fa-file-o"></i>什么是csrf？</a>
       </li>
     
       <li>
-        <a href="/2024/03/05/jwttoken/" ><i class="fa fa-file-o"></i>什么是jwttoken</a>
+        <a href="/2024/03/05/redis笔试题/" ><i class="fa fa-file-o"></i>redis知识点</a>
       </li>
     
       <li>
-        <a href="/2024/03/05/httponly原理/" ><i class="fa fa-file-o"></i>httponly原理？</a>
+        <a href="/2024/03/05/hexo如何实现多台机器同步/" ><i class="fa fa-file-o"></i>hexo如何实现多台机器同步</a>
+      </li>
+    
+      <li>
+        <a href="/2024/03/05/跨域/" ><i class="fa fa-file-o"></i>Access-control-Allow-Origin...</a>
       </li>
     
       <li>
