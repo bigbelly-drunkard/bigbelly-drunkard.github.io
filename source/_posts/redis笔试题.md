@@ -1,5 +1,6 @@
 ---
 title: redis知识点
+date: 2024-03-05 12:25:54
 tags:
     - redis
 categories:

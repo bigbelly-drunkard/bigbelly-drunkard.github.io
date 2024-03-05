@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>httponly原理？ | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="设置了httponly后无法被javascript调用？那用户怎么发xhr请求？浏览器自动发送带有HttpOnly标志的Cookie是其内置功能的一部分，不需要开发者或用户进行特别设置。当服务器通过设置一个带有HttpOnly标志的Cookie响应一个HTTP请求时，这个Cookie会被浏览器存储起">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="httponly原理？"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> httponly原理？</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	
+    <div id="toc">
+        <strong class="sidebar-title">目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E4%BA%86httponly%E5%90%8E%E6%97%A0%E6%B3%95%E8%A2%ABjavascript%E8%B0%83%E7%94%A8%EF%BC%9F%E9%82%A3%E7%94%A8%E6%88%B7%E6%80%8E%E4%B9%88%E5%8F%91xhr%E8%AF%B7%E6%B1%82%EF%BC%9F"><span class="toc-text">设置了httponly后无法被javascript调用？那用户怎么发xhr请求？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8F%91%E9%80%81HttpOnly-Cookie%E7%9A%84%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-text">实现自动发送HttpOnly Cookie的步骤：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E7%82%B9%EF%BC%9A"><span class="toc-text">重要点：</span></a></li></ol></li></ol>
+    </div>
+
+	<div class="mypage">		
+	  		
+
+	  <h2 id="设置了httponly后无法被javascript调用？那用户怎么发xhr请求？"><a href="#设置了httponly后无法被javascript调用？那用户怎么发xhr请求？" class="headerlink" title="设置了httponly后无法被javascript调用？那用户怎么发xhr请求？"></a>设置了httponly后无法被javascript调用？那用户怎么发xhr请求？</h2><p>浏览器自动发送带有<code>HttpOnly</code>标志的Cookie是其内置功能的一部分，不需要开发者或用户进行特别设置。当服务器通过设置一个带有<code>HttpOnly</code>标志的Cookie响应一个HTTP请求时，这个Cookie会被浏览器存储起来。之后，每当用户的浏览器向同一域名发送请求时，浏览器会自动附加这个域名下的所有Cookie，包括那些标记为<code>HttpOnly</code>的Cookie。</p>
+<h3 id="实现自动发送HttpOnly-Cookie的步骤："><a href="#实现自动发送HttpOnly-Cookie的步骤：" class="headerlink" title="实现自动发送HttpOnly Cookie的步骤："></a>实现自动发送<code>HttpOnly</code> Cookie的步骤：</h3><ol>
+<li><p><strong>服务器设置Cookie</strong>：在服务器处理用户登录或其他需要设置Cookie的请求时，通过响应头<code>Set-Cookie</code>加上<code>HttpOnly</code>标志来设置Cookie。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制代码Set-Cookie: sessionId=abc123; Path=/; HttpOnly</span><br></pre></td></tr></table></figure>
+
+<p>这告诉浏览器保存这个名为<code>sessionId</code>的Cookie，并在之后的请求中自动发送给服务器，同时因为<code>HttpOnly</code>的存在，这个Cookie不能被客户端JavaScript访问。</p>
+</li>
+<li><p><strong>浏览器存储和管理Cookie</strong>：一旦浏览器接收到这个设置了<code>HttpOnly</code>标志的Cookie，它会将其存储起来，并在之后向相同域名发送的所有请求中自动包含这个Cookie。</p>
+</li>
+<li><p><strong>自动附加Cookie到请求</strong>：用户在与服务器交互时（例如，浏览网页、提交表单等），浏览器会根据需要自动将存储的Cookie附加到向该域名的请求头中，包括那些<code>HttpOnly</code>的Cookie。</p>
+</li>
+</ol>
+<h3 id="重要点："><a href="#重要点：" class="headerlink" title="重要点："></a>重要点：</h3><ul>
+<li><strong>域名和路径</strong>：浏览器只会将Cookie发送给设置它们的相同域名和路径。如果Cookie的<code>Domain</code>和<code>Path</code>属性限制了其作用范围，浏览器会遵守这些规则，只在相应的域和路径下发送Cookie。</li>
+<li><strong>安全和策略</strong>：为增强安全性，建议使用<code>Secure</code>标志（仅通过HTTPS发送Cookie）和<code>SameSite</code>标志（控制Cookie在跨站请求中的发送行为）与<code>HttpOnly</code>标志一同使用。</li>
+</ul>
+<p>通过这种方式，浏览器确保了<code>HttpOnly</code> Cookie的安全性，使其在客户端脚本中不可访问，同时保证了这些Cookie能够在用户与服务器交互时被自动使用，从而支持如会话管理和用户身份验证等功能。</p>
+<p>注：</p>
+<p>httponly能防止客户端js脚本访问和修改凭据，可以在一定程度上防御xss，例如黑客无法做到通过js将用户的cookie发送给自己，但是如果诱导用户自己执行js脚本发送请求，请求还是会发送成功。因此增加了httponly后，黑客实施xss攻击确实更加繁琐了。</p>
+
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/03/05/jwttoken/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-03-05 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/网络安全/">网络安全<span>4</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/httponly/">httponly<span>1</span></a></li> <li><a href="/tags/xss/">xss<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 John Doe's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

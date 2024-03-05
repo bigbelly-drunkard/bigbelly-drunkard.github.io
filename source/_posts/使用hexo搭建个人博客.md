@@ -1,5 +1,6 @@
 ---
 title: 使用hexo搭建个人博客
+date: 2024-03-05 12:25:54
 mathjax: true
 tags:
     - hexo
@@ -55,7 +56,7 @@ Error: Spawn failed
 
 试了好久终于找到解决方法，将https链接改为ssh连接，参考：https://github.com/hexojs/hexo/issues/2778
 
-![picture1](2024/02/23/使用hexo搭建个人博客/picture1.png)
+![picture1](2024/03/05/使用hexo搭建个人博客/picture1.png)
 
 配置_config.yml ，将repo改为ssh链接
 
@@ -74,7 +75,7 @@ ssh-keygen -t rsa -b 4096 -C "你的github邮箱"
 
 一路点确定
 
-生成的公钥默认存在/var/root/.ssh/id_rsa下，将id_rsa.pub的内容拷贝的github上，点击Deploy keys >> Add deploy key：![picture2](2024/02/23/使用hexo搭建个人博客/picture2.png)
+生成的公钥默认存在/var/root/.ssh/id_rsa下，将id_rsa.pub的内容拷贝的github上，点击Deploy keys >> Add deploy key：![picture2](2024/03/05/使用hexo搭建个人博客/picture2.png)
 
 Hero d 部署博客，成功
 
